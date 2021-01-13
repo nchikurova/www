@@ -1,5 +1,5 @@
-const width = window.innerWidth * 0.8,
-    height = window.innerHeight * 0.7,
+const width = window.innerWidth * 0.6,
+    height = window.innerHeight * 0.5,
     margin = { top: 20, bottom: 20, left: 60, right: 40 };
 
 
@@ -113,7 +113,7 @@ function init() {
         .attr("width", 35)
         .attr("height", 11)
         .attr("y", innerHeight * 0.02)
-        .attr("x", function (d, i) { return innerWidth / 2.2 + i * 30 })
+        .attr("x", function (d, i) { return innerWidth / 2.8 + i * 30 })
         // .attr({
         //     class: "legend",
         //     transform: function (d, i) {
@@ -128,7 +128,7 @@ function init() {
         .append("text")
         .style("font-size", 12)
         .attr("y", innerHeight * 0.02 - 4)
-        .attr("x", function (d, i) { return innerWidth / 2.2 + 10 + i * 30 })
+        .attr("x", function (d, i) { return innerWidth / 2.8 + 10 + i * 30 })
         .style("fill", "black")
         .text(d => d)
         .style("text-anchor", "center")
