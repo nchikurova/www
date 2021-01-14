@@ -23,8 +23,18 @@
 
 <body>
     <h2>States with the highest number of MMIWG cases</h2>
+
+    <form style="text-align: left;">
+
+        <input type="radio" id="week_1" name="week" value="week_1" checked>
+        <label for="week_1"><strong>States </strong></label>
+        <input type="radio" id="week_2" name="week" value="week_2">
+        <label for="week_2"><strong>Cities </strong></label>
+    </form>
+    <br>
     <div id="tooltip"></div>
     <div id="d3-container"> </div>
+
     <script src="../lib/d3.js"></script>
     <script src="../lib/d3.v6.min.js"></script>
     <script src="../lib/d3-array.v2.min.js"></script>

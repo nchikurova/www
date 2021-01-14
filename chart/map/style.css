@@ -15,7 +15,27 @@ div.tooltip {
     border-width: thin;	
     line-height: 0.2;	
   }
+
   path.state:hover {
     stroke-width: 3px;
     /* fill: #A48894; */
+  }
+  input {
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+  
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+  
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+  
+    position: relative;
+    top: 4px;
+  }
+  input:checked {
+    border: 6px solid black;
   }
