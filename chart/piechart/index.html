@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- this is the title that goes in the browser tab name  -->
+    <title>www_piecharts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Heebo:wght@300&family=Sansita+Swashed:wght@600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Sansita+Swashed:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <h2>AI/AN women having experienced violence in their lifetime</h2>
+
+    <!-- <form style="text-align: left;">
+
+        <input type="radio" id="week_1" name="week" value="week_1" checked>
+        <label for="week_1"><strong>data 1 </strong></label>
+        <input type="radio" id="week_2" name="week" value="week_2">
+        <label for="week_2"><strong>data 2 </strong></label>
+    </form> -->
+    <button onclick="update(data1)">all</button>
+    <button onclick="update(data2)">sexual</button>
+
+    <button onclick="update(data3)">physical</button>
+    <button onclick="update(data4)">been stalked</button>
+
+    <!-- <button onclick="update(data)">all</button>
+    <button onclick="update(data)">sexual</button>
+    <br>
+    <button onclick="update(data)">physical</button>
+    <button onclick="update(data)">been stalked</button>
+    <br> -->
+    <div id="tooltip"></div>
+    <div id="d3-container"> </div>
+
+    <script src="../lib/d3.js"></script>
+    <script src="../lib/d3.v6.min.js"></script>
+    <script src="../lib/d3-array.v2.min.js"></script>
+    <script src="../lib/d3-array.js"></script>
+
+
+    <script src="style.css"></script>
+    <script src="piechart.js"></script>
+</body>
+
+</html>
