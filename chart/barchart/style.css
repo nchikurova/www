@@ -61,9 +61,9 @@ div.tooltip {
 
 #d3-container{
     display: grid;
-    grid-template-columns: 4fr 4fr;
+    grid-template-columns: 5fr 4fr;
     width: 100vw;
-    /* height: 90vw; */
+    height: 80vw;
   }
 
   #d3-container1{

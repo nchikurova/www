@@ -23,11 +23,7 @@ svg.selectAll(".text")
     .attr("fill", "black")
     .attr("font", 12)
     .attr("opacity", 1)
-// create 2 data_set
-// data = d3.csv("../data/percentage_only.csv", d => ({
-//     quantity: +d.Quantity
-// }
-// ))
+
 var data1 = { a: 96, b: 4 }
 var data2 = { a: 21, b: 89 }
 
@@ -46,8 +42,9 @@ function update(data) {
     var pie = d3.pie()
         .value(function (d) { return d.value; })
         //.value(function (d) { return d.quantity; })
-        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
-    let data_ready = pie(d3.entries(data))
+        //.sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
+        .sort(null)
+    var data_ready = pie(d3.entries(data))
 
     // map to data
     var u = svg.selectAll("path")
