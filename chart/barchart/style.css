@@ -44,11 +44,13 @@ div.tooltip {
     font-family: 'Teko', sans-serif;
     /* background-color: darkgrey; */
 }
-#d3-container {
-    /* background-color: #E8E5E4;  */
+/* adding background to vertical chart */
+/* #d3-container {
+    /* background-color: #E8E5E4;
     background-color: #F4F2F1;
     width: 35%;
-}
+} */
+
 /* adding background to horizontal chart */
 /* #d3-container1 {
     background-color: #E8E5E4; 
@@ -61,4 +63,12 @@ div.tooltip {
     display: grid;
     grid-template-columns: 4fr 4fr;
     width: 100vw;
+    /* height: 90vw; */
+  }
+
+  #d3-container1{
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    width: 100vw;
+    /* height: 90vw; */
   }

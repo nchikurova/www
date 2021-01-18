@@ -3,7 +3,7 @@ height = 450
 margin = 30
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-var radius = Math.min(width, height) / 3 - margin * 1.9
+var radius = Math.min(width, height) / 2.5 - margin * 1.2
 
 // append the svg object to the div called 'my_dataviz'
 var svg = d3.select("#d3-container")
@@ -28,11 +28,9 @@ svg.selectAll(".text")
 //     quantity: +d.Quantity
 // }
 // ))
-var data1 = { a: 84.3, b: 15.7 }
-var data2 = { a: 56.1, b: 43.9 }
-var data3 = { a: 55.5, b: 44.5 }
-var data4 = { a: 48.8, b: 51.2 }
-//var data2 = { a: 56.1, b: 43.9 }
+var data1 = { a: 96, b: 4 }
+var data2 = { a: 21, b: 89 }
+
 
 // set the color scale
 const color = d3.scaleOrdinal()
@@ -64,19 +62,39 @@ function update(data) {
         .duration(1000)
         .attr('d'
             , d3.arc()
-                .innerRadius(60)
+                .innerRadius(0)
                 .outerRadius(radius)
         )
         .attr('fill', function (d) { return (color(d.data.key)) })
         .attr("stroke", "darkgrey")
         .style("stroke-width", "2px")
         .style("opacity", 1)
+    // .on('mouseover', (event, d) => {
+    //     console.log("d for tooltips", d)
+    //     div
+    //         .transition()
+    //         .duration(50)
+    //         .style('opacity', 1);
+    //     div
+    //         .html("<strong>" + " %" + " " + "</strong>" + "<br>"
+    //             + "of ")
+    //         .style("left", (event.pageX + 10) + "px")
+    //         .style("top", (event.pageY - 28) + "px");
+    // })
+    // .on('mouseout', () => {
+    //     div
+    //         .transition()//
+    //         .duration(100)
+    //         .style('opacity', 0);
+    // })
 
     // remove the group that is not present anymore
     u
         .exit()
         .remove()
-
+    const div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
 }
 

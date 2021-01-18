@@ -1,0 +1,5 @@
+#d3-container{
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    width: 100vw;
+  }
