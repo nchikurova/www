@@ -49,9 +49,16 @@ div.tooltip {
     background-color: #F4F2F1;
     width: 35%;
 }
-#d3-container1 {
+/* adding background to horizontal chart */
+/* #d3-container1 {
     background-color: #E8E5E4; 
-    /* background-color: #F4F2F1; */
+    /* background-color: #F4F2F1; 
     width: 62%;
     height: 60%;
-}
+} */
+
+#d3-container{
+    display: grid;
+    grid-template-columns: 4fr 4fr;
+    width: 100vw;
+  }
