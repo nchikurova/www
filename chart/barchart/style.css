@@ -4,7 +4,8 @@ div.tooltip {
     max-width: 200px;				
     max-height: 200px; 
     padding: 10px;			
-    font: 12px;		
+    font: 28px;		
+    font-family: 'Inria Serif', serif;
     /* background-color:  #1C474D; 
      color: white;	 */
     pointer-events: none;	
@@ -18,24 +19,39 @@ div.tooltip {
 
  .rect:hover {
     stroke-width: 3px;
-    
     fill: #5F5D5C;
   }
 
   .label {
-    font-size: 19px;
+    font-size: 26px;
     /* text-align: left;
     line-height: 1.4; */
     }
 
  .label_h {
-    font-size: 20px;
+    font-size: 22px;
     /* text-align: left;
     line-height: 1.4; */
     }
 
 .label_word {
-    font-size: 20px;
+    font-size: 26px;
     /* text-align: left;
     line-height: 1.4; */
     }
+
+    body {
+    font-family: 'Teko', sans-serif;
+    /* background-color: darkgrey; */
+}
+#d3-container {
+    /* background-color: #E8E5E4;  */
+    background-color: #F4F2F1;
+    width: 35%;
+}
+#d3-container1 {
+    background-color: #E8E5E4; 
+    /* background-color: #F4F2F1; */
+    width: 62%;
+    height: 60%;
+}

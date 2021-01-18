@@ -1,16 +1,15 @@
 d3.csv("../data/percentage_only.csv", d3.autoType).then(data => {
-    //console.log(data);
 
     data.sort((first, second) => d3.descending(first.Quantity, second.Quantity))
 
     const formatPercentage = d3.format(".0%")
     /** CONSTANTS */
     // constants help us reference the same values throughout our code
-    const width = window.innerWidth * 0.8,
+    const width = window.innerWidth * 0.4,
         height = window.innerHeight / 2.5,
         paddingInner = 0.4,
         paddingOuter = 0.4,
-        margin = { top: 10, bottom: 10, left: 100, right: 40 };
+        margin = { top: 20, bottom: 10, left: 100, right: 40 };
 
     /** SCALES */
     // reference for d3.scales: https://github.com/d3/d3-scale
@@ -21,18 +20,13 @@ d3.csv("../data/percentage_only.csv", d3.autoType).then(data => {
         .paddingInner(paddingInner)
         .paddingOuter(paddingOuter)
 
-    //console.log(xScale)
-
     const yScale = d3
         .scaleLinear()
-        //.domain([0, d3.max(data, d => d.Quantity)])
         .domain([0, 100])
-        .range([height - margin.bottom, margin.top]) // range!!!! might be changed
-
+        .range([height - margin.bottom, margin.top])
 
     const yAxis = d3
         .axisLeft(yScale)
-    // .ticks(data.length)
 
     const xAxis = d3
         .axisBottom(xScale)
@@ -87,7 +81,7 @@ d3.csv("../data/percentage_only.csv", d3.autoType).then(data => {
         .join("text")
         .attr("class", "label")
         .attr("x", (d, i) => (margin.left + i * 56))
-        .attr("y", d => yScale(d.Quantity) - 40)
+        .attr("y", d => yScale(d.Quantity) - 50)
         .text(d => d.Quantity + "%")
         .attr("dy", "1.8em")
         .attr("dx", "-.8")

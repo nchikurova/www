@@ -8,7 +8,7 @@ d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
         height = window.innerHeight / 2,
         paddingInner = 0.2,
         paddingOuter = 0.2,
-        margin = { top: 10, bottom: 10, left: 100, right: 60 };
+        margin = { top: 10, bottom: 0, left: 30, right: 60 };
 
     /** SCALES */
     // reference for d3.scales: https://github.com/d3/d3-scale
@@ -97,13 +97,13 @@ d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
         .data(data)
         .join("text")
         .attr("class", "label_word")
-        .attr("y", (d, i) => (margin.top - 10 + i * 35))
-        .attr("x", d => xScale(d.Quantity) + 110)
+        .attr("y", (d, i) => (margin.top - 25
+            + i * 35))
+        .attr("x", d => xScale(d.Quantity) + 40)
         .text(d => d.Quantity + "%")
         .attr("dy", "1.8em")
         .attr("dx", "-.8")
         .attr("fill", "black")
-
 
     // svg
     //     .append("g")
