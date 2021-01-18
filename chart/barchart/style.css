@@ -63,7 +63,7 @@ div.tooltip {
     display: grid;
     grid-template-columns: 5fr 4fr;
     width: 100vw;
-    height: 400 px;
+    /* height: 100vw; */
   }
 
   #d3-container1{

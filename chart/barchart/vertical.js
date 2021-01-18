@@ -5,8 +5,8 @@ d3.csv("../data/percentage_only.csv", d3.autoType).then(data => {
     const formatPercentage = d3.format(".0%")
     /** CONSTANTS */
     // constants help us reference the same values throughout our code
-    const width = window.innerWidth * 0.4,
-        height = window.innerHeight / 2.5,
+    const width = window.innerWidth, //* 0.4,
+        height = 400,//= window.innerHeight / 3,
         paddingInner = 0.4,
         paddingOuter = 0.4,
         margin = { top: 20, bottom: 10, left: 100, right: 40 };
