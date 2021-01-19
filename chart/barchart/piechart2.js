@@ -23,7 +23,7 @@ var arc2 = d3.arc()
     .innerRadius(0)
     .outerRadius(width1 / 3.6);
 
-const color1 = d3.scaleOrdinal(["brown",
+const color1 = d3.scaleOrdinal(["#972B29",
     "lightgrey"])
 // .domain([data1])
 // .range(["brown",

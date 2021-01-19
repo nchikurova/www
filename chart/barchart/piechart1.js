@@ -26,7 +26,7 @@ var arc = d3.arc()
 
 const color = d3.scaleOrdinal()
     .domain(data)
-    .range(["brown",
+    .range(["#972B29",
         "lightgrey"])
 // Grouping different arcs 
 var arcs = g.selectAll("arc")
