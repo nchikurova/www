@@ -52,7 +52,7 @@ path:hover{
 
   #content {
     display: grid;
-    grid-template-columns: 0.5fr 4fr 0.5fr 4fr 0.5fr;
+    grid-template-columns: 1fr 4fr 0fr 4fr 1fr;
     column-gap: 1.5%;
     /* width: 90vw; */
     /* height: 60vh; */
@@ -64,8 +64,7 @@ path:hover{
     column-gap: 1%;
   }
   .title{
-      font-size: 32px;
-      font-weight: 300;
+      padding:0%;
   }
   .subtitle{
       font-size: 28px;
