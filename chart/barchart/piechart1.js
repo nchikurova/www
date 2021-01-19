@@ -14,7 +14,7 @@ const svg1 = d3
     .attr("transform", "translate(0,0)")
 
 let g = svg1.append("g")
-    .attr("transform", "translate(" + width / 2.5 + "," + height / 2.5 + ")");
+    .attr("transform", "translate(" + width / 2 + "," + height / 2.8 + ")");
 
 // Creating Pie generator 
 var pie = d3.pie();
@@ -22,7 +22,7 @@ var pie = d3.pie();
 // Creating arc 
 var arc = d3.arc()
     .innerRadius(0)
-    .outerRadius(width / 3);
+    .outerRadius(width / 3.6);
 
 const color = d3.scaleOrdinal()
     .domain(data)
@@ -51,7 +51,7 @@ arcs.append("path")
             .style('opacity', 1);
         div
             .html("<strong>" + "96 %" + " " + "</strong>" + "<br>"
-                + "AI/AN female victims that experienced sexual violence by Native perpetrators"
+                + "of AI/AN female victims that experienced sexual violence by non-Native perpetrators"
             )
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 28) + "px");

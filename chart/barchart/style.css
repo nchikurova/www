@@ -63,6 +63,10 @@ path:hover{
     grid-template-columns: 4fr 4fr;
     column-gap: 1%;
   }
+  .title{
+      font-size: 32px;
+      font-weight: 300;
+  }
   .subtitle{
       font-size: 28px;
   }
