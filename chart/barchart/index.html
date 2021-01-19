@@ -23,17 +23,37 @@
 </head>
 
 <body>
-    <div id="vertical">
+    <!-- <div id="vertical">
         <h1>AI/AN women having experienced violence in their lifetime</h1>
 
 
         <div id="tooltip"></div>
         <div id="d3-container"> </div>
-    </div>
+    </div> -->
+    <div id="content">
+        <div></div>
+        <div id="horizontal">
+            <h1 style="text-align:center">AI/AN women having experienced violence</h1>
+            <div id="d3-container1"> </div>
+        </div>
+        <div></div>
+        <div id="piecharts">
+            <h1 style="text-align:center">AI/AN female victims that experienced sexual violence</h1>
+            <div id="charts">
+                <div id="chart1" style="align-self: center;">
+                    <div class="subtitle" style="text-align:center">by non-Natives</div>
+                    <div id="d3-container2">
+                    </div>
+                </div>
+                <div id="chart2">
+                    <div class="subtitle" style="text-align:center">by Native perpetrators</div>
 
-    <div id="horizontal">
-        <h1>AI/AN women having experienced violence in their lifetime</h1>
-        <div id="d3-container1"> </div>
+                    <div id="d3-container3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="../lib/d3.js"></script>
     <script src="../lib/d3.v6.min.js"></script>
@@ -42,8 +62,10 @@
 
 
     <script src="style.css"></script>
-    <script src="vertical.js"></script>
+    <!-- <script src="vertical.js"></script> -->
     <script src="horizontal.js"></script>
+    <script src="piechart1.js"></script>
+    <script src="piechart2.js"></script>
 </body>
 
 </html>

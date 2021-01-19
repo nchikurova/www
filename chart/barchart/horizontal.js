@@ -1,14 +1,23 @@
-d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
+d3.csv("../data/horizontal_four.csv", d3.autoType).then(data => {
     //console.log(data);
     data.sort((first, second) => d3.ascending(first.Quantity, second.Quantity))
 
     /** CONSTANTS */
     // constants help us reference the same values throughout our code
-    const width = window.innerWidth * 0.6,
-        height = window.innerHeight / 2,
-        paddingInner = 0.2,
-        paddingOuter = 0.2,
-        margin = { top: 10, bottom: 0, left: 30, right: 60 };
+
+    width = 360;
+    height = 300;
+    margin = { top: 20, bottom: 20, left: 20, right: 20 };
+    paddingInner = 0.2,
+        paddingOuter = 0.2
+
+    svg = d3
+        .select("#d3-container1")
+        .append("svg")
+        .attr("viewBox", "0 0 420 320")
+        .append("g")
+        .attr("transform", "translate(0,0)")
+
 
     /** SCALES */
     // reference for d3.scales: https://github.com/d3/d3-scale
@@ -18,8 +27,6 @@ d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
         .range([margin.bottom, height - margin.top])
         .paddingInner(paddingInner)
         .paddingOuter(paddingOuter)
-
-    //console.log(xScale)
 
     const xScale = d3
         .scaleLinear()
@@ -34,12 +41,6 @@ d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
     // const xAxis = d3
     //     .axisBottom(xScale)
 
-    /** MAIN CODE */
-    const svg = d3
-        .select("#d3-container1")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
 
     // append rects
     const rect = svg
@@ -99,7 +100,7 @@ d3.csv("../data/horizontalchart.csv", d3.autoType).then(data => {
         .attr("class", "label_word")
         .attr("y", (d, i) => (margin.top - 25
             + i * 35))
-        .attr("x", d => xScale(d.Quantity) + 40)
+        .attr("x", d => xScale(d.Quantity) + 30)
         .text(d => d.Quantity + "%")
         .attr("dy", "1.8em")
         .attr("dx", "-.8")
