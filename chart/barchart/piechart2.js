@@ -25,9 +25,6 @@ var arc2 = d3.arc()
 
 const color1 = d3.scaleOrdinal(["#972B29",
     "lightgrey"])
-// .domain([data1])
-// .range(["brown",
-//     "lightgrey"])
 
 // Grouping different arcs 
 var arcs2 = g1.selectAll("arc")

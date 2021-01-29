@@ -1,140 +1,155 @@
-const width = window.innerWidth * 0.9,
-    height = window.innerHeight * 0.7,
-    margin = { top: 20, bottom: 50, left: 60, right: 40 };
 
 
-let svg;
+let bardata = [];
 
-let state = {
-    geojson: null,
-    week_1: null,
-    hover: {
-        latitude: null,
-        longitude: null,
-        state: null,
-    },
-};
+for (var i = 0; i < 100; i++) {
+    bardata.push(Math.random() * 30);
+}
 
-/**
- * LOAD DATA
- * Using a Promise.all([]), we can load more than one dataset at a time
- * */
-Promise.all([
-    d3.json("../lib/data/usState.json"),
-    d3.csv("../lib/data/number_cases.csv"
-    ),
-]).then(([geojson, week_1]) => {
-    state.geojson = geojson;
-    state.week_1 = week_1;
-    console.log("state: ", state);
-    init();
+var height = 440,
+    width = 700,
+    tempColor;
+
+var yScale = d3.scaleLinear()
+    .domain([0, d3.max(bardata)])
+    .range([0, height - 40])
+
+var xScale = d3.scaleBand()
+    .domain(bardata)
+    .range([0, width])
+    .paddingInner(.1)
+    .paddingOuter(.1)
+
+var colors = d3.scaleLinear()
+    .domain([0, bardata.length * .33,
+        bardata.length * .66,
+        bardata.length])
+    .range(['#B58929', '#C61C6F',
+        '#268BD2', '#85992C'])
+
+var myChart = d3
+    .select("#d3-container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .selectAll('rect')
+    .data(bardata)
+    .enter()
+    .append('rect')
+
+    .attr('fill', (d, i) => colors(i)) //if i want the color to be ralated to the index
+    .attr('height', d => yScale(d))
+    .attr('y', d => height - yScale(d))
+
+    .attr('width', d => xScale.bandwidth())
+    // .attr('height', 0)
+    .attr('x', d => xScale(d))
+    // .attr('y', height)
+
+    .on('mouseover', function (event, d) {
+
+        tooltip.transition()
+            .duration(200)
+            .style('opacity', .9)
+
+        tooltip.html('<div style="font-size: 20; font-weight: bold">' +
+            d + '</div>')
+            .style('left', (event.pageX - 35 + 'px'))
+            .style('top', (event.pageY - 30 + 'px'))
+
+        tempColor = this.style.fill;
+        d3.select(this)
+            .style('fill', 'lightyellow')
+    })
+    .on('mouseout', function (d) {
+
+        tooltip.html('')
+        d3.select(this)
+
+            .style('fill', tempColor)
+    });
+
+var tooltip = d3.select('body')
+    .append('div')
+    .style('position', 'absolute')
+    .style('padding', '0 10px')
+    .style('background', 'white')
+    .style('opacity', 0)
+
+// myChart.transition()
+//     .duration(2000)
+//     .attr('height', d => yScale(d))
+//     .attr('y', d => height - yScale(d))
+//     .delay((d, i) => i * 20)
+//     .ease(d3.easeLinear)
+//.remove().duration(2000)
+
+
+const button1 = d3.select('#tr_2');
+
+button1.on('change', function (d) {
+    myChart.transition().duration(2000)
+        .attr('y', d => height - yScale(d))
+        .delay((d, i) => i * 30)
+        .style('fill', 'brown')
+        .transition().duration(2000)
+        .attr('y', d => height - yScale(d))
+        .delay((d, i) => i * 30)
+        .style('fill', 'orange')
+        .transition().duration(2000)
+        .attr('y', d => height - yScale(d))
+        .delay((d, i) => i * 30)
+        .style('fill', 'yellow')
+        .transition().duration(2000)
+        .attr('y', d => height - yScale(d))
+        .delay((d, i) => i * 30)
+        .style('fill', 'green')
+});
+const button2 = d3.select('#tr_1');
+
+button2.on('change', function (d) {
+    myChart.transition().duration(2000)
+        .attr('y', d => height - yScale(d))
+        .delay((d, i) => i * 20)
+        .style('fill', (d, i) => colors(i))
+});
+const button3 = d3.select('#tr_3');
+
+button3.on('click', function (d) {
+    myChart
+        .transition()
+        .duration(2000)
+        .attr('height', d => yScale(d))
+        .attr('y', d => height - yScale(d) / 1.5)
+        .delay((d, i) => i * 20)
+        .ease(d3.easeLinear)
+        .style("fill", "brown")
 
 });
 
-/*
- * INITIALIZING FUNCTION
-  */
-function init() {
-    // our projection and path are only defined once, and we don't need to access them in the draw function,
-    // so they can be locally scoped to init()
-    const projection = d3.geoAlbersUsa().fitSize([width, height], state.geojson);
-    const path = d3.geoPath().projection(projection);
+const button4 = d3.select('#tr_4');
 
-    svg = d3
-        .select("#d3-container")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+button4.on('click', function (d) {
+    myChart
+        .transition()
+        .duration(2000)
+        .attr('height', d => height - yScale(d))// - height)
+        .attr('y', d => yScale(d) / 2)// - yScale(d) / 0.5)
+        .delay((d, i) => i * 20)
+        .ease(d3.easeBounce)
+        .style("fill", "#C61C6F")
 
-    cleanData = d3.groups(state.week_1, d => d.state)
+});
 
-    console.log("clean data", cleanData)
+const button5 = d3.select('#tr_5');
 
-    // Map state => total noconfidence
-    totalsByState = new Map(
-        cleanData.map(d => {
-            const totalObject = d[1].find(r => r.category === 'Total');
-            return [d[0], totalObject];
-        })
-    )
-    console.log("totalsMap", totalsByState)
+button5.on('change', function (d) {
 
-    noconfByState = new Map(
-        cleanData.map(d => {
-            const totalObject = d[1].find(r => r.category === 'Total');
-            return [d[0], totalObject.noconf];
-        })
-    )
-    console.log("noconfByState", noconfByState)
+    myChart.transition().duration(2000)
+        .attr('height', d => yScale(d))
+        .attr('y', d => height - yScale(d) / 2)
+        .delay((d, i) => i * 20)
+        .style('fill', '#268BD2')
+        .ease(d3.easeBounceOut)
 
-    ////// DATA MANIPULATION
-
-    // totalNoconf = new Map(state.week_1.map(d => [d.category, d.characteristics]))
-    // console.log("category", totalNoconf)
-
-
-    // const total_value_array = new Map(state.week_1.map(d => [d.category, d.noconf]))
-
-    // console.log("Total_value_array", total_value_array)
-    // const neededArray = new Array(state.week_1.map(d => d.noconf))
-
-    // console.log("neededArray", neededArray)
-
-    // // gives me one number, and I need an Array!
-    // console.log("Found", (state.week_1.map(d => [d.category === "Total", d.noconf])[0][1]))
-
-    // // this array gives me the last value of the column, and I need the first one!
-
-    // totalWeekly = new Map(state.week_1.map(d => [d.state, d.noconf]))
-
-    // console.log("totalWeekly", totalWeekly)
-    /////////
-    div = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    colorScale = d3.scaleLinear()
-        .range(["#C8E1E5", "#1C474D"])
-        .domain([d3.min(state.week_1, d => d.noconf), 1300000])
-    // I needed to exclude US total numbers
-    //.domain([d3.min(state.week_1, d => d.noconf), d3.max(state.week_1, d => d.noconf)]);
-
-    // console.log("color", colorScale.domain())
-
-    svg
-        .selectAll(".state")
-        // all of the features of the geojson, meaning all the states as individuals
-        .data(state.geojson.features)
-        .join("path")
-        .attr("d", path)
-        .attr("class", "state")
-        //.attr("fill", "transparent")
-        .style("stroke", "black")
-        .attr("fill", d => {
-            let value = noconfByState.get(d.properties.STUSPS);
-            return (value != 0 ? colorScale(value) : "grey")
-        })
-        .on('mouseover', d => {
-            div
-                .transition()
-                .duration(50)
-                .style('opacity', 0.8);
-            div
-                .html("<h2><strong>" + "Week 1" + "</strong></h2>" +
-                    d.properties.NAME + " " + d.properties.STUSPS)
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-        })
-        .on('mouseout', () => {
-            div
-                .transition()
-                .duration(100)
-                .style('opacity', 0);
-        })
-
-    draw(); // calls the draw function
-}
-
-function draw() {
-
-}
+});
