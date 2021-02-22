@@ -1,8 +1,8 @@
 div.tooltip {	
     position: absolute;			
     text-align: left;			
-    /* max-width: 200px;					
-    max-height: 200px; */
+    /* max-width: 200px; */
+    /* max-height: 700px; */
     padding: 10px;			
     font: 12px;		
     /* background-color:  #1C474D; 
@@ -16,8 +16,10 @@ div.tooltip {
     line-height: 0.2;	
   }
 
-  path.state:hover {
+  path.polygon:hover {
+    stroke: black;
     stroke-width: 3px;
+
     /* fill: #A48894; */
   }
   input {

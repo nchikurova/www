@@ -4,44 +4,32 @@
     <meta charset="utf-8">
 
     <!-- this is the title that goes in the browser tab name  -->
-    <title>www_map</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Heebo:wght@300&family=Sansita+Swashed:wght@600&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <title>US map</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Sansita+Swashed:wght@600&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-    <h2>States with the highest number of MMIWG cases</h2>
+    <h2></h2>
 
     <form style="text-align: left;">
+        <input type="radio" id="data" name="data" value="data" checked>
+        <label for="data"><strong>Positive covid </strong></label>
+        <input type="radio" id="data2" name="data2" value="data2">
+        <label for="data2"><strong>NYS facility </strong></label>
 
-        <input type="radio" id="week_1" name="week" value="week_1" checked>
-        <label for="week_1"><strong>States </strong></label>
-        <input type="radio" id="week_2" name="week" value="week_2">
-        <label for="week_2"><strong>Cities </strong></label>
     </form>
     <br>
-    <div id="tooltip"></div>
-    <div id="d3-container"> </div>
 
+    <div id="d3-container"> </div>
+    <div id="tooltip"></div>
     <script src="../lib/d3.js"></script>
     <script src="../lib/d3.v6.min.js"></script>
-    <script src="../lib/d3-array.v2.min.js"></script>
+    <!-- <script src="../lib/d3-array.v2.min.js"></script> -->
     <script src="../lib/d3-array.js"></script>
 
 
-    <script src="style.css"></script>
+    <!-- <link rel="stylesheet" type="text/css" src="style.css" /> -->
     <script src="map.js"></script>
 </body>
 
