@@ -96,21 +96,21 @@ function init() {
                 .duration(100)
                 .style('opacity', 0);
         })
-        .selectAll(".circle")
-        // all of the features of the geojson, meaning all the states as individuals
-        .data(state.data2, d => d["Location"])
-        .join("circle")
-        // .attr("d", path)
-        .attr("class", "circle")
-        .style("stroke", "black")
-        .attr("fill", "black")
-        .attr("r", 4)
-        .attr("transform", d => {
-            // d.features.map(e => { console.log(e); })
-            // console.log(d.features);
-            const [x, y] = projection([d.X, d.Y]);
-            return `translate(${x}, ${y})`;
-        })
+    // .selectAll(".circle")
+    // // all of the features of the geojson, meaning all the states as individuals
+    // .data(state.data2, d => d["Location"])
+    // .join("circle")
+    // // .attr("d", path)
+    // .attr("class", "circle")
+    // .style("stroke", "black")
+    // .attr("fill", "black")
+    // .attr("r", 4)
+    // .attr("transform", d => {
+    //     // d.features.map(e => { console.log(e); })
+    //     // console.log(d.features);
+    //     const [x, y] = projection([d.X, d.Y]);
+    //     return `translate(${x}, ${y})`;
+    // })
 
     // const button1 = d3.select("#data2")
 
