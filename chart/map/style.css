@@ -4,7 +4,7 @@ div.tooltip {
     /* max-width: 200px; */
     /* max-height: 700px; */
     padding: 10px;			
-    font: 12px;		
+    font: 10px;		
     /* background-color:  #1C474D; 
      color: white;	 */
     pointer-events: none;	
@@ -15,8 +15,10 @@ div.tooltip {
     border-width: thin;	
     line-height: 0.2;	
   }
-
-  path.polygon:hover {
+.circle:hover {
+  color: yellow;
+}
+  path.firstmap_polygon:hover {
     stroke: black;
     stroke-width: 3px;
 
@@ -41,3 +43,43 @@ div.tooltip {
   input:checked {
     border: 6px solid black;
   }
+
+  #content {
+    display: grid;
+    grid-template-columns: 1.5fr 4fr 4fr 1.5fr;
+    grid-template-rows: 4fr 4fr 4fr;
+    
+    column-gap: 6%;
+    row-gap: 2%;
+  }
+
+#d3-container { 
+  grid-column-start: 2; 
+  grid-column-end: 3; 
+  grid-row-start: 1; 
+  grid-row-end: 2; 
+  grid-area: 'container';
+}
+
+#d3-container2 { 
+  grid-column-start: 3; 
+  grid-column-end: 4; 
+  grid-row-start: 1; 
+  grid-row-end: 2; 
+  grid-area: 'container2';
+}
+#d3-container3 { 
+  grid-column-start: 2; 
+  grid-column-end: 3; 
+  grid-row-start: 2; 
+  grid-row-end: 3; 
+  grid-area: 'container3';
+}
+
+#d3-container4 { 
+  grid-column-start: 3; 
+  grid-column-end: 4; 
+  grid-row-start: 2; 
+  grid-row-end: 3; 
+  grid-area: 'container4';
+}
