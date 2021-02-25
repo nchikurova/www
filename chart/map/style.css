@@ -86,7 +86,7 @@ div.tooltip {
 
 #d3-container5 { 
   grid-column-start: 2; 
-  grid-column-end: 3; 
+  grid-column-end: 4; 
   grid-row-start: 3; 
   grid-row-end: 4; 
   grid-area: 'container5';

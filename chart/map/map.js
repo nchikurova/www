@@ -13,8 +13,8 @@ margin3 = { top: 0, bottom: 0, left: 20, right: 40 };
 width4 = 500,
     height4 = 400
 margin4 = { top: 0, bottom: 0, left: 20, right: 40 };
-width5 = 500,
-    height5 = 400
+width5 = 800,
+    height5 = 600
 margin5 = { top: 0, bottom: 0, left: 20, right: 40 };
 
 let svg;
@@ -50,7 +50,7 @@ Promise.all([
             Latitude: +d["Latitude"],
             entityName: d["Entity Name"]
         })),//data4
-    d3.csv("../data/subway_stations.csv"), //stationData
+    d3.csv("../data/subway_stations.csv")//stationData
 ]).then(([geojson, data, data2, stateData, data3, data4, stationsData]) => {
     state.geojson = geojson; //NYC
     state.data = data;//Covid positive tested
@@ -380,6 +380,7 @@ function init() {
         .attr("class", "polygon")
         .style("stroke", "black")
         .attr("fill", 'transparent')
+        .style("opacity", 0.7)
 
     svg5
         .selectAll("circle")
@@ -388,10 +389,15 @@ function init() {
         .attr("class", "circle")
         .style("stroke", "black")
         .attr("fill", d => {
-            if (d["Route1"] === ["R"] || ["N"]) return "yellow";
-            else if (d["Route1"] === ["1"]) return "red";
-            else if (d["Route1"] === ["4"] || d["Route1"] === ["5"]) return "green";
-            else return "brown";
+            if (d["Route1"] === ("R" || "Q" || "W" || "N")) return "yellow";
+            else if (d["Route1"] === ("1" || "2" || "3")) return "red";
+            else if (d["Route1"] === ("4" || "5" || "6")) return "green";
+            else if (d["Route1"] === ("B" || "D" || "F" || "M")) return "orange";
+            else if (d["Route1"] === ("7")) return "purple";
+            else if (d["Route1"] === "G") return "7DBB3E";
+            else if (d["Route1"] === ("J" || "Z")) return "AF8017";
+            else if (d["Route1"] === "L") return "grey";
+            else return "blue";
         })
         .attr("r", 2)
         .attr("transform", d => {
@@ -431,43 +437,5 @@ function draw() {
 
 
 
-
-// // LEGENDS
-// keys = ["20", "30", "40", "50", "70"]
-// legendColor = d3.scaleOrdinal().domain(["20", "30", "40", "50", "70"])
-//     .range(["#d8c9c7",
-//         "#b89e99",
-//         "#a98883",
-//         "#8a5e57",
-//         "#57170d",
-//     ])
-// legendHeight = innerHeight * 0.05
-// svg.selectAll("myrect")
-//     .data(keys)
-//     .enter()
-//     .append("rect")
-//     .attr("width", 35)
-//     .attr("height", 11)
-//     .attr("y", innerHeight * 0.02)
-//     .attr("x", function (d, i) { return innerWidth / 2.8 + i * 30 })
-//     // .attr({
-//     //     class: "legend",
-//     //     transform: function (d, i) {
-//     //         return "translate(0," + (i + legendHeight - 65) + ")";
-//     //     }
-//     // })
-//     .style("fill", d => legendColor(d))
-
-// svg.selectAll("mylabels")
-//     .data(keys)
-//     .enter()
-//     .append("text")
-//     .style("font-size", 12)
-//     .attr("y", innerHeight * 0.02 - 4)
-//     .attr("x", function (d, i) { return innerWidth / 2.8 + 10 + i * 30 })
-//     .style("fill", "black")
-//     .text(d => d)
-//     .style("text-anchor", "center")
-//     .style("alignment-baseline", "middle")
 
 
