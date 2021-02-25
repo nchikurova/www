@@ -21,6 +21,7 @@ let svg;
 let svg2;
 let svg3;
 let svg4;
+let svg5;
 
 let state = {
     geojson: null,
@@ -50,7 +51,11 @@ Promise.all([
             Latitude: +d["Latitude"],
             entityName: d["Entity Name"]
         })),//data4
-    d3.csv("../data/subway_stations.csv")//stationData
+    d3.csv("../data/subway_stations.csv")
+    // ...d => ({
+
+    //     route: d["Route1"].trim()
+    // }))//stationData
 ]).then(([geojson, data, data2, stateData, data3, data4, stationsData]) => {
     state.geojson = geojson; //NYC
     state.data = data;//Covid positive tested
@@ -392,12 +397,13 @@ function init() {
             if (d["Route1"] === ("R" || "Q" || "W" || "N")) return "yellow";
             else if (d["Route1"] === ("1" || "2" || "3")) return "red";
             else if (d["Route1"] === ("4" || "5" || "6")) return "green";
-            else if (d["Route1"] === ("B" || "D" || "F" || "M")) return "orange";
+            else if (d["Route1"] === ("B" || "D" || "F" || "M" || "FS")) return "orange";
             else if (d["Route1"] === ("7")) return "purple";
-            else if (d["Route1"] === "G") return "7DBB3E";
+            else if (d["Route1"] === ("G" || "GS")) return "7DBB3E";
             else if (d["Route1"] === ("J" || "Z")) return "AF8017";
             else if (d["Route1"] === "L") return "grey";
-            else return "blue";
+            else if (d["Route1"] === ("A" || "C" || "E" || "e")) return "blue";
+            else return "transparent";
         })
         .attr("r", 2)
         .attr("transform", d => {
@@ -417,7 +423,8 @@ function init() {
                 .html(
                     "Subway Station Name: " + "<strong><h3>" + d["Station Name"] + "</strong></h3>"
                     + "Latitude: " + d["Entrance Latitude"] + "<br>"
-                    + "Longitude: " + d["Entrance Longitude"]
+                    + "Longitude: " + d["Entrance Longitude"] + "<br>"
+                    + "Route: " + d["Route1"]
                 )
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
