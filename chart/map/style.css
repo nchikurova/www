@@ -13,7 +13,7 @@ div.tooltip {
     border-color: black;
     border-style: solid;
     border-width: thin;	
-    line-height: 0.2;	
+    /* line-height: 0.2;	 */
   }
 .circle:hover {
   color: yellow;
