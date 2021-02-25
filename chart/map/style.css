@@ -47,7 +47,7 @@ div.tooltip {
   #content {
     display: grid;
     grid-template-columns: 1.5fr 4fr 4fr 1.5fr;
-    grid-template-rows: 4fr 4fr 4fr;
+    grid-template-rows: 4fr 4fr 4fr 4fr;
     
     column-gap: 6%;
     row-gap: 2%;
@@ -82,4 +82,12 @@ div.tooltip {
   grid-row-start: 2; 
   grid-row-end: 3; 
   grid-area: 'container4';
+}
+
+#d3-container5 { 
+  grid-column-start: 2; 
+  grid-column-end: 3; 
+  grid-row-start: 3; 
+  grid-row-end: 4; 
+  grid-area: 'container5';
 }

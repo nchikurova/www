@@ -13,6 +13,9 @@ margin3 = { top: 0, bottom: 0, left: 20, right: 40 };
 width4 = 500,
     height4 = 400
 margin4 = { top: 0, bottom: 0, left: 20, right: 40 };
+width5 = 500,
+    height5 = 400
+margin5 = { top: 0, bottom: 0, left: 20, right: 40 };
 
 let svg;
 let svg2;
@@ -24,7 +27,8 @@ let state = {
     data: null,
     data2: null,
     data3: null,
-    data4: null
+    data4: null,
+    stationsData: null,
 };
 
 /**
@@ -45,15 +49,16 @@ Promise.all([
             Longitude: +d["Longitude"].trim(),
             Latitude: +d["Latitude"],
             entityName: d["Entity Name"]
-        }))//data4
-
-]).then(([geojson, data, data2, stateData, data3, data4]) => {
+        })),//data4
+    d3.csv("../data/subway_stations.csv"), //stationData
+]).then(([geojson, data, data2, stateData, data3, data4, stationsData]) => {
     state.geojson = geojson; //NYC
     state.data = data;//Covid positive tested
     state.data2 = data2;//Retail food
     state.stateData = stateData;
     state.data3 = data3;
     state.data4 = data4;
+    state.stationsData = stationsData;
     console.log("state: ", state);
     init();
 
@@ -250,7 +255,7 @@ function init() {
         .attr("d", path3)
         .attr("class", "polygon")
         .style("stroke", "black")
-        .attr("fill", 'transparent')
+        .attr("fill", '#Ecf3e5')
     svg3
         .selectAll("circle")
         .data(state.data3, d => d["Facility Name"])//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
@@ -350,9 +355,75 @@ function init() {
                 .style('opacity', 0);
         })
 
+
+    // FIFTH MAP
+
+    const projection5 = d3.geoAlbersUsa().fitSize([width5, height5], state.geojson);
+    const path5 = d3.geoPath().projection(projection5);
+
+    svg5 = d3
+        .select("#d3-container5")
+        .append("svg")
+        .attr("width", width5)
+        .attr("height", height5);
+
+    div5 = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    svg5
+
+        .selectAll(".polygon")
+        .data(state.geojson.features)
+        .join("path")
+        .attr("d", path5)
+        .attr("class", "polygon")
+        .style("stroke", "black")
+        .attr("fill", 'transparent')
+
+    svg5
+        .selectAll("circle")
+        .data(state.stationsData, d => d)//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
+        .join("circle")
+        .attr("class", "circle")
+        .style("stroke", "black")
+        .attr("fill", d => {
+            if (d["Route1"] === ["R"] || ["N"]) return "yellow";
+            else if (d["Route1"] === ["1"]) return "red";
+            else if (d["Route1"] === ["4"] || d["Route1"] === ["5"]) return "green";
+            else return "brown";
+        })
+        .attr("r", 2)
+        .attr("transform", d => {
+            let point5 = projection5([d["Entrance Longitude"], d["Entrance Latitude"]]);
+            // console.log(point)
+            // return (value != null ? colorScale(value) : "#FBF6F5")
+            return (point5 != null ? (`translate(${point5[0]},${point5[1]})`) : [])
+        })
+
+        .on('mouseover', (event, d) => {
+            // console.log("tooltip d", d)
+            div5
+                .transition()
+                .duration(50)
+                .style('opacity', 1);
+            div5
+                .html(
+                    "Subway Station Name: " + "<strong><h3>" + d["Station Name"] + "</strong></h3>"
+                    + "Latitude: " + d["Entrance Latitude"] + "<br>"
+                    + "Longitude: " + d["Entrance Longitude"]
+                )
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on('mouseout', () => {
+            div5
+                .transition()
+                .duration(100)
+                .style('opacity', 0);
+        })
     draw(); // calls the draw function
 }
-
 function draw() {
 
 };
