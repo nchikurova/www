@@ -15,8 +15,9 @@ div.tooltip {
     border-width: thin;	
     /* line-height: 0.2;	 */
   }
-.circle:hover {
-  color: yellow;
+circle.circle:hover {
+  stroke: black;
+    stroke-width: 3px;
 }
   path.firstmap_polygon:hover {
     stroke: black;
@@ -50,7 +51,7 @@ div.tooltip {
     grid-template-rows: 4fr 4fr 4fr 4fr;
     
     column-gap: 6%;
-    row-gap: 2%;
+    row-gap: 0%;
   }
 
 #d3-container { 
@@ -90,4 +91,7 @@ div.tooltip {
   grid-row-start: 3; 
   grid-row-end: 4; 
   grid-area: 'container5';
+}
+#d3-container5 {
+  background-color: #B2CEE9;
 }

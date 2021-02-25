@@ -51,7 +51,7 @@ Promise.all([
             Latitude: +d["Latitude"],
             entityName: d["Entity Name"]
         })),//data4
-    d3.csv("../data/subway_stations.csv")
+    d3.csv("../data/subway_stations_clean.csv")
     // ...d => ({
 
     //     route: d["Route1"].trim()
@@ -60,10 +60,11 @@ Promise.all([
     state.geojson = geojson; //NYC
     state.data = data;//Covid positive tested
     state.data2 = data2;//Retail food
-    state.stateData = stateData;
-    state.data3 = data3;
-    state.data4 = data4;
-    state.stationsData = stationsData;
+    state.stateData = stateData;//New York State json
+    state.data3 = data3;// Health Facility given
+    state.data4 = data4;// Health Faciliity cleaned
+    state.stationsData = stationsData;// Subway Map 
+
     console.log("state: ", state);
     init();
 
@@ -176,16 +177,12 @@ function init() {
         .append("svg")
         .attr("width", width2)
         .attr("height", height2);
-    //ypos = []
+
     div2 = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0)
-    // .attr("transform", function (d, i) {
-    //     return "translate (5," + (ypos[i].off - 13) + ")";
-    // });
 
     svg2
-
         .selectAll(".polygon")
         .data(state.stateData.features)
         .join("path")
@@ -196,7 +193,7 @@ function init() {
 
     svg2
         .selectAll("circle")
-        .data(state.data2, d => d["Entity.Name"])//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
+        .data(state.data2, d => d["Entity.Name"])
         .join("circle")
         .attr("class", "circle")
         .style("stroke", "black")
@@ -208,8 +205,6 @@ function init() {
         .attr("r", 2)
         .attr("transform", d => {
             let point = projection2([+d.X, +d.Y]);
-            // console.log(point)
-            // return (value != null ? colorScale(value) : "#FBF6F5")
             return (point != null ? (`translate(${point[0]},${point[1]})`) : [])
         })
 
@@ -253,7 +248,6 @@ function init() {
         .style("opacity", 0);
 
     svg3
-
         .selectAll(".polygon")
         .data(state.stateData.features)
         .join("path")
@@ -263,7 +257,7 @@ function init() {
         .attr("fill", '#Ecf3e5')
     svg3
         .selectAll("circle")
-        .data(state.data3, d => d["Facility Name"])//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
+        .data(state.data3, d => d["Facility Name"])
         .join("circle")
         .attr("class", "circle")
         .style("stroke", "black")
@@ -271,8 +265,6 @@ function init() {
         .attr("r", 2)
         .attr("transform", d => {
             let point3 = projection3([+d["Facility Longitude"], +d["Facility Latitude"]]);
-            // console.log(point)
-            // return (value != null ? colorScale(value) : "#FBF6F5")
             return (point3 != null ? (`translate(${point3[0]},${point3[1]})`) : [])
         })
 
@@ -300,7 +292,7 @@ function init() {
 
     // FOURTH MAP
 
-    const projection4 = d3.geoAlbersUsa().fitSize([width4, height4], state.stateData);
+    const projection4 = d3.geoAlbersUsa().fitSize([width4, height4], state.geojson);
     const path4 = d3.geoPath().projection(projection4);
 
     svg4 = d3
@@ -316,7 +308,7 @@ function init() {
     svg4
 
         .selectAll(".polygon")
-        .data(state.stateData.features)
+        .data(state.geojson.features)
         .join("path")
         .attr("d", path4)
         .attr("class", "polygon")
@@ -325,7 +317,7 @@ function init() {
 
     svg4
         .selectAll("circle")
-        .data(state.data4, d => d.entityName)//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
+        .data(state.data4, d => d.entityName)
         .join("circle")
         .attr("class", "circle")
         .style("stroke", "black")
@@ -334,7 +326,6 @@ function init() {
         .attr("transform", d => {
             let point4 = projection4([d.Longitude, d.Latitude]);
             // console.log(point)
-            // return (value != null ? colorScale(value) : "#FBF6F5")
             return (point4 != null ? (`translate(${point4[0]},${point4[1]})`) : [])
         })
 
@@ -377,39 +368,38 @@ function init() {
         .style("opacity", 0);
 
     svg5
-
         .selectAll(".polygon")
         .data(state.geojson.features)
         .join("path")
         .attr("d", path5)
         .attr("class", "polygon")
         .style("stroke", "black")
-        .attr("fill", 'transparent')
+        .attr("fill", '#FDE0BF')
         .style("opacity", 0.7)
 
     svg5
         .selectAll("circle")
-        .data(state.stationsData, d => d)//newData_stores, d => d)//state.data2)//, d => [d.Long, d.Lat])
+        .data(state.stationsData, d => d)
         .join("circle")
-        .attr("class", "circle")
+        .attr("class", "circle_map")
         .style("stroke", "black")
+        .style("stroke-width", "0.01px")
         .attr("fill", d => {
-            if (d["Route1"] === ("R" || "Q" || "W" || "N")) return "yellow";
-            else if (d["Route1"] === ("1" || "2" || "3")) return "red";
-            else if (d["Route1"] === ("4" || "5" || "6")) return "green";
-            else if (d["Route1"] === ("B" || "D" || "F" || "M" || "FS")) return "orange";
+            if (d["Route1"] === "R" || d["Route1"] === "Q" || d["Route1"] === "W" || d["Route1"] === "N") return "#FBD532";
+            else if (d["Route1"] === "1" || d["Route1"] === "2" || d["Route1"] === "3") return "red";
+            else if (d["Route1"] === "4" || d["Route1"] === "5" || d["Route1"] === "6") return "green";
+            else if (d["Route1"] === "B" || d["Route1"] === "D" || d["Route1"] === "F" || d["Route1"] === "M" || d["Route1"] === "FS") return "#FB921E";
             else if (d["Route1"] === ("7")) return "purple";
-            else if (d["Route1"] === ("G" || "GS")) return "7DBB3E";
-            else if (d["Route1"] === ("J" || "Z")) return "AF8017";
-            else if (d["Route1"] === "L") return "grey";
-            else if (d["Route1"] === ("A" || "C" || "E" || "e")) return "blue";
-            else return "transparent";
+            else if (d["Route1"] === "G" || d["Route1"] === "GS") return "#7DBB3E";
+            else if (d["Route1"] === "J" || d["Route1"] === "Z") return "#AF8017";
+            else if (d["Route1"] === "L") return "#7B7D79";
+            else if (d["Route1"] === "A" || d["Route1"] === "C" || d["Route1"] === "E" || d["Route1"] === "e") return "#0E5DA9";
+            else return "grey";
         })
         .attr("r", 2)
         .attr("transform", d => {
             let point5 = projection5([d["Entrance Longitude"], d["Entrance Latitude"]]);
             // console.log(point)
-            // return (value != null ? colorScale(value) : "#FBF6F5")
             return (point5 != null ? (`translate(${point5[0]},${point5[1]})`) : [])
         })
 
