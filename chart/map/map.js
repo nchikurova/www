@@ -1,3 +1,5 @@
+//declaring width and height for all svg containers
+
 width = 400
 height = 400
 margin = { top: 20, bottom: 20, left: 20, right: 40 };
@@ -13,6 +15,7 @@ margin3 = { top: 0, bottom: 0, left: 20, right: 40 };
 width4 = 500,
     height4 = 400
 margin4 = { top: 0, bottom: 0, left: 20, right: 40 };
+
 width5 = 800,
     height5 = 600
 margin5 = { top: 0, bottom: 0, left: 20, right: 40 };
@@ -44,7 +47,7 @@ Promise.all([
     })), //data
     d3.csv("../data/nys_retail_food_store_xy.csv"), //data2
     d3.json("../data/NYSjson.json"),//stateData
-    d3.csv("../data/NYS_Health_Facility.csv"),//data3
+    d3.csv("../data/NYS_Health_Facility_deleted_missing.csv"),//data3
     d3.csv("../data/NYS_Retail_Food_Stores_NEW.csv",
         d => ({
             Longitude: +d["Longitude"].trim(),
@@ -52,10 +55,7 @@ Promise.all([
             entityName: d["Entity Name"]
         })),//data4
     d3.csv("../data/subway_stations_clean.csv")
-    // ...d => ({
 
-    //     route: d["Route1"].trim()
-    // }))//stationData
 ]).then(([geojson, data, data2, stateData, data3, data4, stationsData]) => {
     state.geojson = geojson; //NYC
     state.data = data;//Covid positive tested
@@ -306,7 +306,6 @@ function init() {
         .style("opacity", 0);
 
     svg4
-
         .selectAll(".polygon")
         .data(state.geojson.features)
         .join("path")
@@ -381,7 +380,7 @@ function init() {
         .selectAll("circle")
         .data(state.stationsData, d => d)
         .join("circle")
-        .attr("class", "circle_map")
+        .attr("class", "circle")
         .style("stroke", "black")
         .style("stroke-width", "0.01px")
         .attr("fill", d => {

@@ -16,14 +16,13 @@ div.tooltip {
     /* line-height: 0.2;	 */
   }
 circle.circle:hover {
-  stroke: black;
-    stroke-width: 3px;
+  stroke: white;
+  stroke-width: 3px;
 }
   path.firstmap_polygon:hover {
     stroke: black;
     stroke-width: 3px;
 
-    /* fill: #A48894; */
   }
   input {
     -webkit-appearance: none; 
@@ -51,7 +50,7 @@ circle.circle:hover {
     grid-template-rows: 4fr 4fr 4fr 4fr;
     
     column-gap: 6%;
-    row-gap: 0%;
+    row-gap: 2%;
   }
 
 #d3-container { 
@@ -60,6 +59,7 @@ circle.circle:hover {
   grid-row-start: 1; 
   grid-row-end: 2; 
   grid-area: 'container';
+  background-color: whitesmoke;
 }
 
 #d3-container2 { 
@@ -68,6 +68,7 @@ circle.circle:hover {
   grid-row-start: 1; 
   grid-row-end: 2; 
   grid-area: 'container2';
+  background-color: whitesmoke;
 }
 #d3-container3 { 
   grid-column-start: 2; 
@@ -75,6 +76,7 @@ circle.circle:hover {
   grid-row-start: 2; 
   grid-row-end: 3; 
   grid-area: 'container3';
+  background-color: whitesmoke;
 }
 
 #d3-container4 { 
@@ -83,6 +85,7 @@ circle.circle:hover {
   grid-row-start: 2; 
   grid-row-end: 3; 
   grid-area: 'container4';
+  background-color: whitesmoke;
 }
 
 #d3-container5 { 
