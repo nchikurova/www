@@ -1,3 +1,9 @@
+body {
+background-color: #DEDBDD;
+}
+
+
+
 div.tooltip {	
     position: absolute;			
     text-align: left;			
@@ -15,9 +21,13 @@ div.tooltip {
     border-width: thin;	
     /* line-height: 0.2;	 */
   }
-
-  path:hover {
+path {
+    stroke: white;
+}
+path:hover {
     stroke: black;
     stroke-width: 2px;
-
   }
+.circle {
+    stroke:rgb(45, 46, 45);
+}
