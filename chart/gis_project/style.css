@@ -1,0 +1,23 @@
+div.tooltip {	
+    position: absolute;			
+    text-align: left;			
+    /* max-width: 200px; */
+    /* max-height: 700px; */
+    padding: 10px;			
+    font: 10px;		
+    /* background-color:  #1C474D; 
+     color: white;	 */
+    pointer-events: none;	
+    background-color:   white; 
+    color:black;	
+    border-color: black;
+    border-style: solid;
+    border-width: thin;	
+    /* line-height: 0.2;	 */
+  }
+
+  path:hover {
+    stroke: black;
+    stroke-width: 2px;
+
+  }
