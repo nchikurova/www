@@ -115,13 +115,13 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
                 .duration('50')
                 .style("opacity", 0);
         })
-        .on('mouseover', function (d) {
-            d3.select(d.LocationDesc)
-                .transition()
-                .duration('50')
-                .attr('opacity', '1')
-                .attr('fill', 'steelblue')
-        })
+    // .on('mouseover', function (d) {
+    //     d3.select(d.LocationDesc)
+    //         .transition()
+    //         .duration('50')
+    //         .attr('opacity', '1')
+    //         .attr('fill', 'steelblue')
+    // })
 })
 
 

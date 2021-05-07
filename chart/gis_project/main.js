@@ -84,7 +84,7 @@ function init() {
 
     draw();
 
-    // called every times state is updated
+
     svg.append("g")
         .attr("fill", "brown")
         .attr("fill-opacity", 0.5)
@@ -151,26 +151,6 @@ function draw() {
                     .transition(t)
                     .attr("opacity", 0.5))
             ,
-            // .on('mouseover', (event, d) => {
-            //     console.log("tooltip d", d)
-            //     div
-            //         .transition()
-            //         .duration(50)
-            //         .style('opacity', 1);
-            //     div
-            //         .html(
-            //             "State: " + "<strong><h3>" + d.LocationDesc + "</strong></h3>" +
-            //             "Average Cost per Pack: " + formatNumber(d.Data_Value)
-            //         )
-            //         .style("left", (event.pageX + 10) + "px")
-            //         .style("top", (event.pageY - 28) + "px");
-            // })
-            // .on('mouseout', () => {
-            //     div
-            //         .transition()
-            //         .duration(100)
-            //         .style('opacity', 0);
-            // }),
             update => update,
             exit => exit.call(bubble => bubble.transition(t)
                 .call(g => g.select("circle").attr("r", 0))
