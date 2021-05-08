@@ -1,6 +1,8 @@
 body {
     /* font-family: 'Source Sans Pro', sans-serif; */
     font-family: 'Lora', serif;
+    margin-left: 5%;
+    margin-right: 5%;
 /* font-family: 'Source Sans Pro', sans-serif; */
 }
 header{
@@ -11,7 +13,14 @@ header{
     font-size:20px;
 
 }
-
+.name {
+    padding: 20px;
+    text-align:left;
+    background:rgb(71, 70, 70);
+    color:whitesmoke;
+    font-size:20px;
+   
+}
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #333;
@@ -69,7 +78,7 @@ circle.circle:hover {
 
   #content {
     display: grid;
-    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-template-columns: 1fr 4fr 4fr 0.5fr;
     /* grid-template-rows: 4fr 4fr 4fr 4fr; */
     
     column-gap: 6%;
@@ -98,5 +107,8 @@ circle.circle:hover {
   /* background-color: whitesmoke; */
 }
 .img {
-    width: 250px;
+    width: 600px;
+}
+#questions {
+    font-size:20px;
 }

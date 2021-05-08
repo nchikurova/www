@@ -31,6 +31,7 @@
             <!-- <a href="#about">About</a> -->
         </div>
     </header>
+
     <br>
     </div>
     <div id="content">
@@ -39,27 +40,83 @@
         </div>
         <div id="d3-container2">
             <br>
-            For Lab Assignment 3: Spacial Data Analysis I used data from
-            <a href="https://opendata.cityofnewyork.us/">NYC Open Data</a>
-            source.
+            The data sources for this assignment were
+            <a href="https://opendata.cityofnewyork.us/">NYC Open Data</a> and <a href="https://www.census.gov/">The US
+                Census Bureau</a>.
+            <br><br>
+            The map on the left was created with d3.js and represents the number of noise related complaints
+            from <a
+                href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9">
+                311 Service Requests in NYC</a>. Hover over to see the name of the neighborhood and the number of Noise
+            Related Complaints in this neighborhood.
 
 
         </div>
 
     </div>
-    <section id="#questions" class="#questions">
+    <section id="questions" class="questions">
         <br>
         <br>
         <div></div>
-        Questions starts here
-        <img id='arrests' class='img' scr='../data/Arrests.png'>
-        <img id='noise' class='img' scr='../data/noise.png'>
-        <img id='arrest_capita' class='img' scr="../data/arrest_capita.png">
-    </section id="#embeddedmap">
-    <section>
+        <h3 class='name'>Questions for Lab Assignment 3.</h3>
+        Following Print Layouts and Analysis for them were made in <a href="https://qgis.org/en/site/">QGIS</a>
         <br>
         <br>
-        map is here
+        Detailed analysis report is available by request.
+        <br>
+        <br>
+        Specific Data Used:
+        <ul>
+            <li>OpenStreetMap as a base layer</li>
+            <li>Census Tracts</li>
+            <li>American Community Surbey (ACS) population</li>
+            <li>311 Service Complaints
+            </li>
+            <li>NYPD Arrests in NYC</li>
+            <li>Neighborhood Tabulation Areas</li>
+            <li>NYC Subway Routes </li>
+        </ul>
+        <h4 class='question'>Question 1</h4>
+        How many arrests per capita in each neighborhood in 2020? What are the top 10 neighborhoods
+        with the
+        most arrests?
+        <br>
+        <br>
+        <img id='arrest_capita' class='img' src="../data/ar_capita.png">
+        <br>
+        <br>
+        <img id='arrests' class='img' src='../data/Arrests.png'>
+
+
+
+        <h4 class='question'>Question 2</h4>
+        How many complaints per capita in each neighborhood in 2020? What are the top 10 neighborhoods with the
+        most complaints?
+        <br>
+        <br>
+        <img id='comp_capita' class='img' src='../data/comp_capita.png'>
+        <br>
+        <br>
+        <img id='complaints' class='img' src='../data/complaints.png'>
+        <h4 class='question'>Question 3</h4>
+        What are the ratios of arrests to complaints for each neighborhood? Which neighborhoods have ratios that are
+        three times higher than the average?
+        <br>
+        <br>
+        <h4 class='question'>Question 4</h4>How many noise related complaints (311 services) in each neighborhood?
+        <br>
+        <br>
+        <img id='noise' class='img' src='../data/noise_new.png'>
+        <h4 class='question'>Question 5</h4>What are the top 5 subway lines that have the most noise complaints within
+        50 and 100 meters?
+        <br>
+        <br>
+        <img id='buffer' class='img' src='../data/buffer.png'>
+    </section>
+    <section id="embeddedmap" class="embeddedmap">
+        <br>
+        <br>
+        <h3 class='name'>Embedded Map</h3>
     </section>
     <div id="tooltip"></div>
     <script src="../lib/d3.js"></script>
