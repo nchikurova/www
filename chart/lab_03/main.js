@@ -122,11 +122,11 @@ function init() {
                 .style('opacity', 0);
         })
     //LEGENDS
-    keys = ["500", "2000", "4000", "7000", "18000"]
+    keysText = ["500", "2000", "4000", "7000", "18000"]
     legendColor = d3.scaleLinear().domain(["500", "2000", "4000", "7000", "18000"])
         .range(["#efefef", "#b4b4b4", "#959595", "#505050", "black"])
     svg.selectAll("myrect")
-        .data(keys)
+        .data(keysText)
         .enter()
         .append("rect")
         .attr("width", 30)
@@ -137,10 +137,10 @@ function init() {
         .style("fill", d => legendColor(d))
 
     svg.selectAll("mylabels")
-        .data(keys)
+        .data(keysText)
         .enter()
         .append("text")
-        .style("font-size", 12)
+        .style("font-size", 10)
         .attr("y", height - height / 12)
         .attr("x", function (d, i) { return width - width / 2.5 - 20 + i * 30 })
         .style("fill", "black")
@@ -152,7 +152,7 @@ function init() {
     const topFive = state.data.features.filter(d => d.properties.NUMPOINTS > 5000)
 
     topFiveData = new Map(topFive.map(d => [d.properties.ntaname, d.properties.NUMPOINTS]))
-
+    console.log("topFiveData", topFiveData)
     svg2 = d3
         .select("#d3-container2")
         .append("svg")
@@ -166,7 +166,7 @@ function init() {
     //console.log(topFiveData)
     const xScale = d3
         .scaleBand()
-        .domain(topFiveData, d => d.ntaname)
+        .domain(topFiveData, d => d.key)
         .range([margin2.left, width2 - margin2.right])
         .paddingInner(0.5);
 
@@ -187,10 +187,10 @@ function init() {
         .selectAll("rect")
         .data(topFiveData)
         .join("rect")
-        .attr("y", d => yScale(d.NUMPOINTS))
-        .attr("x", d => xScale(d.ntaname))
+        .attr("y", d => yScale(d.value))
+        .attr("x", d => xScale(d.key))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height2 - margin2.bottom - yScale(d.NUMPOINTS))
+        .attr("height", d => yScale(d.value))//height2 - yScale(d.value))
         .attr("fill", "steelblue")
         .on('mouseover', (event, d) => {
             // console.log("tooltip d", d)
@@ -199,8 +199,8 @@ function init() {
                 .duration(50)
                 .style('opacity', 1);
             div2
-                .html("Neighborhood name: " + "<h3><strong>" + d.ntaname + "</strong></h3>" +
-                    "Number of Noise Related Complaints in 2020: " + "<strong>" + d.NUMPOINTS + "</strong>"
+                .html("Neighborhood name: " + "<h3><strong>" + d.key + "</strong></h3>" +
+                    "Number of Noise Related Complaints in 2020: " + "<strong>" + d.value + "</strong>"
                 )
 
                 .style("left", (event.pageX + 10) + "px")
@@ -214,15 +214,15 @@ function init() {
         })
 
     // append text
-    const text = svg
+    const text2 = svg2
         .selectAll("text")
         .data(topFiveData)
         .join("text")
         .attr("class", "label")
         // this allows us to position the text in the center of the bar
-        .attr("x", d => xScale(d.ntaname) + (xScale.bandwidth() / 2))
-        .attr("y", d => yScale(d.NUMPOINTS))
-        .text(d => d.NUMPOINTS)
+        .attr("x", d => xScale(d.key))// + (xScale.bandwidth() / 2))
+        .attr("y", d => yScale(d.value))
+        .text(d => d.value)
         .attr("dy", "1.25em");
 
     svg2
