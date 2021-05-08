@@ -1,8 +1,8 @@
 body {
     /* font-family: 'Source Sans Pro', sans-serif; */
     font-family: 'Lora', serif;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 7%;
+    margin-right: 7%;
 /* font-family: 'Source Sans Pro', sans-serif; */
 }
 header{
@@ -65,10 +65,7 @@ div.tooltip {
     border-width: thin;	
     /* line-height: 0.2;	 */
   }
-circle.circle:hover {
-  stroke: white;
-  stroke-width: 3px;
-}
+
   path.firstmap_polygon:hover {
     stroke: black;
     stroke-width: 3px;
