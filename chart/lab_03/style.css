@@ -65,25 +65,7 @@ circle.circle:hover {
     stroke-width: 3px;
 
   }
-  input {
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    appearance: none;
-  
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-  
-    border: 2px solid #999;
-    transition: 0.2s all linear;
-    margin-right: 5px;
-  
-    position: relative;
-    top: 4px;
-  }
-  input:checked {
-    border: 6px solid black;
-  }
+ 
 
   #content {
     display: grid;
@@ -112,5 +94,9 @@ circle.circle:hover {
   grid-row-start: 1; 
   grid-row-end: 2; 
   grid-area: 'container2';
+  font-size:20px;
   /* background-color: whitesmoke; */
+}
+.img {
+    width: 250px;
 }
