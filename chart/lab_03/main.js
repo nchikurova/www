@@ -149,90 +149,87 @@ function init() {
         .style("alignment-baseline", "middle")
 
     //SECOND CHART
-    const topFive = state.data.features.filter(d => d.properties.NUMPOINTS > 5000)
+    // const topFive = state.data.features.filter(d => d.properties.NUMPOINTS > 5000)
 
-    topFiveData = new Map(topFive.map(d => [d.properties.ntaname, d.properties.NUMPOINTS]))
-    console.log("topFiveData", topFiveData)
-    svg2 = d3
-        .select("#d3-container2")
-        .append("svg")
-        .attr("width", width2)
-        .attr("height", height2);
+    // topFiveData = new Map(topFive.map(d => [d.properties.ntaname, d.properties.NUMPOINTS]))
+    // console.log("topFiveData", topFiveData)
+    // svg2 = d3
+    //     .select("#d3-container2")
+    //     .append("svg")
+    //     .attr("width", width2)
+    //     .attr("height", height2);
 
-    div2 = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0)
+    // div2 = d3.select("body").append("div")
+    //     .attr("class", "tooltip")
+    //     .style("opacity", 0)
 
-    //console.log(topFiveData)
-    const xScale = d3
-        .scaleBand()
-        .domain(topFiveData, d => d.key)
-        .range([margin2.left, width2 - margin2.right])
-        .paddingInner(0.5);
-
-
-    const yScale = d3
-        .scaleLinear()
-        .domain([0, 18606])
-        .range([height2 - margin2.bottom, margin2.top]);
-
-    console.log("x", xScale.domain(), "y", yScale.domain())
-    // reference for d3.axis: https://github.com/d3/d3-axis
-    const xAxis = d3.axisBottom(xScale)//.ticks(state.data.length);
+    // //console.log(topFiveData)
+    // const xScale = d3
+    //     .scaleBand()
+    //     .domain(topFiveData, d => d.key)
+    //     .range([margin2.left, width2 - margin2.right])
+    //     .paddingInner(0.5);
 
 
-    // reference for d3.axis: https://github.com/d3/d3-axis
+    // const yScale = d3
+    //     .scaleLinear()
+    //     .domain([0, 18606])
+    //     .range([height2 - margin2.bottom, margin2.top]);
 
-    svg2
-        .selectAll("rect")
-        .data(topFiveData)
-        .join("rect")
-        .attr("y", d => yScale(d.value))
-        .attr("x", d => xScale(d.key))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => yScale(d.value))//height2 - yScale(d.value))
-        .attr("fill", "steelblue")
-        .on('mouseover', (event, d) => {
-            // console.log("tooltip d", d)
-            div2
-                .transition()
-                .duration(50)
-                .style('opacity', 1);
-            div2
-                .html("Neighborhood name: " + "<h3><strong>" + d.key + "</strong></h3>" +
-                    "Number of Noise Related Complaints in 2020: " + "<strong>" + d.value + "</strong>"
-                )
-
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on('mouseout', () => {
-            div2
-                .transition()
-                .duration(100)
-                .style('opacity', 0);
-        })
-
-    // append text
-    const text2 = svg2
-        .selectAll("text")
-        .data(topFiveData)
-        .join("text")
-        .attr("class", "label")
-        // this allows us to position the text in the center of the bar
-        .attr("x", d => xScale(d.key))// + (xScale.bandwidth() / 2))
-        .attr("y", d => yScale(d.value))
-        .text(d => d.value)
-        .attr("dy", "1.25em");
-
-    svg2
-        .append("g")
-        .attr("class", "axis")
-        .attr("transform", `translate(0, ${height2 - margin2.bottom})`)
-        .call(xAxis)
+    // console.log("x", xScale.domain(), "y", yScale.domain())
+    // // reference for d3.axis: https://github.com/d3/d3-axis
+    // const xAxis = d3.axisBottom(xScale)//.ticks(state.data.length);
 
 
+    // // reference for d3.axis: https://github.com/d3/d3-axis
 
+    // svg2
+    //     .selectAll("rect")
+    //     .data(topFiveData)
+    //     .join("rect")
+    //     .attr("y", d => yScale(d.value))
+    //     .attr("x", d => xScale(d.key))
+    //     .attr("width", xScale.bandwidth())
+    //     .attr("height", d => yScale(d.value))//height2 - yScale(d.value))
+    //     .attr("fill", "steelblue")
+    //     .on('mouseover', (event, d) => {
+    //         // console.log("tooltip d", d)
+    //         div2
+    //             .transition()
+    //             .duration(50)
+    //             .style('opacity', 1);
+    //         div2
+    //             .html("Neighborhood name: " + "<h3><strong>" + d.key + "</strong></h3>" +
+    //                 "Number of Noise Related Complaints in 2020: " + "<strong>" + d.value + "</strong>"
+    //             )
+
+    //             .style("left", (event.pageX + 10) + "px")
+    //             .style("top", (event.pageY - 28) + "px");
+    //     })
+    //     .on('mouseout', () => {
+    //         div2
+    //             .transition()
+    //             .duration(100)
+    //             .style('opacity', 0);
+    //     })
+
+    // // append text
+    // const text2 = svg2
+    //     .selectAll("text")
+    //     .data(topFiveData)
+    //     .join("text")
+    //     .attr("class", "label")
+    //     // this allows us to position the text in the center of the bar
+    //     .attr("x", d => xScale(d.key))// + (xScale.bandwidth() / 2))
+    //     .attr("y", d => yScale(d.value))
+    //     .text(d => d.value)
+    //     .attr("dy", "1.25em");
+
+    // svg2
+    //     .append("g")
+    //     .attr("class", "axis")
+    //     .attr("transform", `translate(0, ${height2 - margin2.bottom})`)
+    //     .call(xAxis)
 
 };
 
