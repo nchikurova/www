@@ -109,3 +109,29 @@ div.tooltip {
 #questions {
     font-size:20px;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th,td{ /*horizontal line*/
+  /* font-weight: bold; */
+  border: 0.5px solid rgb(51, 50, 50);
+  
+}
+th:nth-child(n+1){
+  background:#4f4e50;
+  color:white;
+}
+tr {
+  border: rgb(61, 60, 60) 0.5px solid;
+
+}
+
+td {
+  text-align: right;
+  padding: 0 0.5em;
+}
+tr:hover { /* hover - changing color when highlighting */
+  background-color: #ebe0f5;
+}

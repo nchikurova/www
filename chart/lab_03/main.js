@@ -17,8 +17,8 @@ let svg2;
 let state = {
     geojson: null,
     data: null,
-    data2: null,
-    stateData: null
+    data50: null,
+    data100: null
 
 
 };
@@ -28,23 +28,21 @@ let state = {
  * Using a Promise.all([]), we can load more than one dataset at a time
  * */
 Promise.all([
-    //d3.json("../data/NYC.json"), //geojsom
+
     d3.json("https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/ArcGIS/rest/services/NYC_Neighborhood_Tabulation_Areas/FeatureServer/0/query?where=1=1&outFields=*&outSR=4326&f=pgeojson"), //geojsom
 
     d3.json("../data/Noise_complaints.geojson"),
-    // , d => ({
-    //     people_tested: +d.features.properties.people_tested
-    // })), //data
-    d3.csv("../data/nys_retail_food_store_xy.csv"), //data2
-    d3.json("../data/NYSjson.json"),//stateData
+
+    d3.csv("../data/50m.csv"), //data50
+    d3.csv("../data/100m.csv") //data100
 
 
-]).then(([geojson, data, data2, stateData]) => {
+]).then(([geojson, data, data50, data100]) => {
     state.geojson = geojson; //NYC
 
     state.data = data;
-    state.data2 = data2;//Retail food
-    state.stateData = stateData;//New York State json
+    state.data50 = data50;//50m buffer
+    state.data100 = data100;//100m buffer
 
     console.log("state: ", state);
     init();
@@ -148,7 +146,7 @@ function init() {
         .style("text-anchor", "center")
         .style("alignment-baseline", "middle")
 
-    //SECOND CHART
+    //BAR CHART
     // const topFive = state.data.features.filter(d => d.properties.NUMPOINTS > 5000)
 
     // topFiveData = new Map(topFive.map(d => [d.properties.ntaname, d.properties.NUMPOINTS]))
@@ -231,6 +229,76 @@ function init() {
     //     .attr("transform", `translate(0, ${height2 - margin2.bottom})`)
     //     .call(xAxis)
 
+
+    // select the `table` container in the HTML
+    const table = d3.select("#d3-table");
+
+    /** HEADER */
+    const thead = table.append("thead");
+    thead
+        .append("tr")
+        .append("th")
+        .attr("colspan", "7")
+        .text("Within 50 meters");
+
+    thead
+        .append("tr")
+        .selectAll("th")
+        .data(state.data50.columns)
+        .join("td")
+        .text(d => d);
+
+    /** BODY */
+    // rows
+    const rows = table
+        .append("tbody")
+        .selectAll("tr")
+        .data(state.data50)
+        .join("tr");
+
+    // cells
+    rows
+        .selectAll("td")
+        .data(d => Object.values(d))
+        .join("td")
+        // update the below logic to apply to your dataset
+        .attr("class", d => +d > 3 ? 'high' : null)
+        .text(d => d);
+
+    // select the `table` container in the HTML
+    const table2 = d3.select("#d3-table2");
+
+    /** HEADER */
+    const thead2 = table2.append("thead");
+    thead2
+        .append("tr")
+        .append("th")
+        .attr("colspan", "7")
+        .text("Within 100 meters");
+
+    thead2
+        .append("tr")
+        .selectAll("th")
+        .data(state.data100.columns)
+        .join("td")
+        .text(d => d);
+
+    /** BODY */
+    // rows
+    const rows2 = table2
+        .append("tbody")
+        .selectAll("tr")
+        .data(state.data100)
+        .join("tr");
+
+    // cells
+    rows2
+        .selectAll("td")
+        .data(d => Object.values(d))
+        .join("td")
+        // update the below logic to apply to your dataset
+        .attr("class", d => +d > 3 ? 'high' : null)
+        .text(d => d);
 };
 
 
