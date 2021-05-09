@@ -8,18 +8,14 @@ width2 = 500,
     height2 = 400
 margin2 = { top: 0, bottom: 0, left: 20, right: 40 };
 
-
-
 let svg;
 let svg2;
-
 
 let state = {
     geojson: null,
     data: null,
     data50: null,
     data100: null
-
 
 };
 
@@ -30,17 +26,13 @@ let state = {
 Promise.all([
 
     d3.json("https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/ArcGIS/rest/services/NYC_Neighborhood_Tabulation_Areas/FeatureServer/0/query?where=1=1&outFields=*&outSR=4326&f=pgeojson"), //geojsom
-
     d3.json("../data/Noise_complaints.geojson"),
-
     d3.csv("../data/50m.csv"), //data50
     d3.csv("../data/100m.csv") //data100
 
-
 ]).then(([geojson, data, data50, data100]) => {
     state.geojson = geojson; //NYC
-
-    state.data = data;
+    state.data = data;//Noise compliants
     state.data50 = data50;//50m buffer
     state.data100 = data100;//100m buffer
 
