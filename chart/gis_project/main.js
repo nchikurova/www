@@ -1,7 +1,7 @@
 'use strict';
 
-let width = 360;
-let height = 300;
+let width = 460;
+let height = 400;
 let margin = { top: 60, bottom: 50, left: 40, right: 40 };
 
 let svg;
@@ -9,6 +9,15 @@ let projection;
 let path;
 let div;
 let bubble;
+
+let width2 = 460;
+let height2 = 400;
+let margin2 = { top: 60, bottom: 50, left: 40, right: 40 };
+
+let svg2;
+let projection2;
+let path2;
+let div2;
 
 let state = {
     geojson: null,
@@ -32,17 +41,7 @@ Promise.all([
 //const formatValue = d3.format(",d")
 //const newData = new Map(state.taxes.map(d => [d.LocationDesc, d.Data_Value]))
 const formatNumber = d3.format(",.2f");
-function textTween(text, valueof) {
-    if (typeof valueof !== "function") {
-        const value = +valueof;
-        valueof = () => value;
-    }
-    return text.textTween(function (d) {
-        const value = +this.textContent;//.replace(/,/g, "");
-        const i = d3.interpolateNumber(value, valueof(d));
-        return t => formatNumber(i(t));
-    });
-}
+
 function init() {
 
 
@@ -52,12 +51,14 @@ function init() {
     svg = d3
         .select("#map-container")
         .append("svg")
-        .attr("viewBox", "0 0 500 320")
-        .append("g")
-        .attr("transform", "translate(0,0)")
-        .attr("text-anchor", "middle")
-        .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
+        .attr("width", width)
+        .attr("height", height)
+    // .attr("viewBox", "0 0 500 320")
+    // .append("g")
+    // .attr("transform", "translate(0,0)")
+    // .attr("text-anchor", "middle")
+    // .attr("font-family", "sans-serif")
+    // .attr("font-size", 10)
 
     //formatTime = d3.format(",") //if value interpreted by number
 
@@ -67,8 +68,26 @@ function init() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    //const newData = new Map(state.taxes.map(d => [d.LocationDesc, d.Data_Value]))
-    //const newDataYear = new Map(state.taxes.map(d => [d.LocationDesc, d.Year]))
+    const dataYear = state.taxes.filter(d => d.Year === 2010)
+    console.log("dataYear", dataYear)
+    const newData = new Map(dataYear.map(d => [d.LocationDesc, d.Data_Value]))
+    const newDataYear = new Map(dataYear.map(d => [d.LocationDesc, d.Year]))
+
+
+    const colorScale = d3.scaleLinear().range(["whitesmoke", "black"]).domain([3, d3.max(state.taxes, d => d.Data_Value)])
+    console.log(colorScale.domain())
+    // svg
+    //     .selectAll(".state")
+    //     // all of the features of the geojson, meaning all the states as individuals
+    //     .data(state.geojson.features)
+    //     .join("path")
+    //     .attr("d", path)
+    //     .attr("stroke-linejoin", "round")
+    //     .attr("class", "state")
+    //     .attr("fill", "grey")
+    //     .attr('opacity', 0.5)
+
+    // draw();
 
 
     svg
@@ -77,98 +96,122 @@ function init() {
         .data(state.geojson.features)
         .join("path")
         .attr("d", path)
-        .attr("stroke-linejoin", "round")
         .attr("class", "state")
-        .attr("fill", "grey")
-        .attr('opacity', 0.5)
+        .attr("fill", d => {
+            //console.log("d", d)
+            let value = newData.get(d.properties.NAME);
+            return (value != 0 ? colorScale(value) : "grey")
 
-    draw();
+        })
+        .style("stroke", "black")
+        .on('mouseover', (event, d) => {
+            //console.log("tooltip d", d)
+            div
+                .transition()
+                .duration(50)
+                .style('opacity', 1);
+            div
+                .html(
+                    "State: " + "<strong><h3>" + d.properties.NAME + "</strong></h3>" +
+                    "Average Cost per Pack: " + newDataYear.get(d.properties.NAME) +
+                    "<br>" + formatNumber(newData.get(d.properties.NAME))
+
+                )
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on('mouseout', () => {
+            div
+                .transition()
+                .duration(100)
+                .style('opacity', 0);
+        })
 
 
-    svg.append("g")
-        .attr("fill", "brown")
-        .attr("fill-opacity", 0.5)
-        .attr("stroke", "#fff")
-        .attr("stroke-width", 0.5)
-        .selectAll("circle")
-        .data(state.taxes
-            .map(d => d.Data_Value)
-            .sort((a, b) => b.Data_Value - a.Data_Value))
-        .join("circle")
-        // .attr("transform", d => {
+    projection2 = d3.geoAlbersUsa().fitSize([width2, height2], state.geojson);
+    path2 = d3.geoPath().projection(projection2);
 
-        //     const [x, y] = projection([d.Longitude, d.Latitude]);
-        //     return `translate(${x}, ${y})`;
-        // })
-        .attr("transform", d => `translate(${path.centroid(state.geojson)})`)
-        .attr("r", d => d.Data_Value)
-        .append("title")
-        .text(d => `${d.LocationDesc}
-    ${d.Data_Value}`);
+    svg2 = d3
+        .select("#map-container2")
+        .append("svg")
+        // .attr("viewBox", "0 0 500 320")
+        // .append("g")
+        // .attr("transform", "translate(0,0)")
+        // .attr("text-anchor", "middle")
+        // .attr("font-family", "sans-serif")
+        // .attr("font-size", 10)
+        .attr("width", width2)
+        .attr("height", height2);
+
+    //formatTime = d3.format(",") //if value interpreted by number
+
+    //const formatValue = d3.format(",d")
+
+    div2 = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    const dataYear2 = state.taxes.filter(d => d.Year === 2019)
+    console.log("dataYear2", dataYear2)
+    const newData2 = new Map(dataYear2.map(d => [d.LocationDesc, d.Data_Value]))
+    const newDataYear2 = new Map(dataYear2.map(d => [d.LocationDesc, d.Year]))
+
+    const colorScale2 = d3.scaleLinear().range(["whitesmoke", "black"]).domain([3, d3.max(state.taxes, d => d.Data_Value)])
+    console.log(colorScale2.domain())
+    //const colorScale = d3.scaleOrdinal().range(["white", "whitesmoke", "grey", "black"]).domain([0, d3.max(state.taxes, d => d.Data_Value)])
+    //console.log(colorScale.domain())
+    // svg2
+    //     .selectAll(".state")
+    //     // all of the features of the geojson, meaning all the states as individuals
+    //     .data(state.geojson.features)
+    //     .join("path")
+    //     .attr("d", path2)
+    //     .attr("stroke-linejoin", "round")
+    //     .attr("class", "state")
+    //     .attr("fill", "grey")
+    //     .attr('opacity', 0.5)
+
+    // draw();
+
+
+    svg2
+        .selectAll(".state")
+        // all of the features of the geojson, meaning all the states as individuals
+        .data(state.geojson.features)
+        .join("path")
+        .attr("d", path)
+        .attr("class", "state")
+        .attr("fill", d => {
+            //console.log("d", d)
+            let value = newData2.get(d.properties.NAME);
+            return (value != 0 ? colorScale2(value) : "grey")
+
+        })
+        .style("stroke", "black")
+        .on('mouseover', (event, d) => {
+            //console.log("tooltip d", d)
+            div2
+                .transition()
+                .duration(50)
+                .style('opacity', 1);
+            div2
+                .html(
+                    "State: " + "<strong><h3>" + d.properties.NAME + "</strong></h3>" +
+                    "Average Cost per Pack: " + newDataYear2.get(d.properties.NAME) +
+                    "<br>" + formatNumber(newData2.get(d.properties.NAME))
+
+                )
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on('mouseout', () => {
+            div2
+                .transition()
+                .duration(100)
+                .style('opacity', 0);
+        })
+
 }
 function draw() {
-    const t = svg.transition()
-        .duration(5000)
-        .ease(d3.easeLinear);
 
-    bubble = svg
-        //.append("g")
-        .selectAll("g")
-        // all of the features of the geojson, meaning all the states as individuals
-        .data(state.taxes, d => d.Id)
-        //.data(state.taxes.filter(d => d.Year === Year), d => d.Data_Value)
-        // .join("circle")
-        .join(enter =>
-            enter
-                .append("g")
-                .attr("transform", d => {
-                    // d.features.map(e => { console.log(e); })
-                    // console.log(d.features);
-                    const [x, y] = projection([d.Longitude, d.Latitude]);
-                    return `translate(${x}, ${y})`;
-                })
-                .call(g => g.append("circle")
-                    .attr("fill", "brown")
-                    .attr("class", "circle")
-                    .attr("opacity", 0.3)
-                    .attr("stroke", "currentColor")
-                    .attr('r', 0))
-                //d => d.Data_Value * 1.5)
-                //.attr("opacity", 0.5)
-
-                .call(g => g.append("text")
-                    .attr("class", 'text')
-                    .attr("dy", "0.35em")
-                    .attr("fill-opacity", 1)
-                    .attr("y", -2)
-                    .text(d => d.LocationDesc)
-                    .attr("font-size", 10)
-                    .call(text => text.append("tspan")
-                        .style("font-variant-numeric", "tabular-nums")
-                        .attr("x", 0)
-                        .attr("y", 12)
-                        .text(0))
-                    .transition(t)
-                    .attr("opacity", 0.5))
-            ,
-            update => update,
-            exit => exit.call(bubble => bubble.transition(t)
-                .call(g => g.select("circle").attr("r", 0))
-                .call(g => g.select("text").attr("fill-opacity", 0))
-                .call(g => g.select("tspan").call(textTween, 0))
-                .remove())
-            // exit => exit.call(exit => exit.transition()
-            //     .remove())
-        )
-    // .call(selection =>
-    //     selection.transition(d3.easeElastic)
-    //         .delay(d => d.Year + 1)
-    //         .attr("opacity", 0.3)
-    //         //.attr("fill", "blue")
-    //         .attr("r", d => d.Data_Value * 1.5))
-    bubble.select("circle").transition(t)
-        .attr("r", d => d.Data_Value * 1.5);
-
-    bubble.select("tspan").transition(t)
-        .call(textTween, d => d.Data_Value);
 };
