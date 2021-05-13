@@ -1,7 +1,7 @@
-'use strict';
+//'use strict';
 d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => {
 
-    console.log(data);
+    //console.log(data);
     let width = 360;
     let height = 300;
     let margin = { top: 60, bottom: 50, left: 60, right: 40 };
