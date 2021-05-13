@@ -1,8 +1,8 @@
 body {
   /* font-family: 'Source Sans Pro', sans-serif; */
   font-family: 'Lora', serif;
-  margin-left: 7%;
-  margin-right: 7%;
+  /* margin-left: 7%;
+  margin-right: 7%; */
 /* font-family: 'Source Sans Pro', sans-serif; */
 }
 header{
@@ -110,12 +110,12 @@ grid-area: 'map2';
 }
 
 .img {
-  width: 600px;
+  width: 500px;
 }
 
 #barchart{
   display: grid;
-  grid-template-columns: 0.5fr 4fr 4fr 0.5fr;
+  grid-template-columns: 0.1fr 4fr 0.5fr 0.1fr;
   /* grid-template-rows: 4fr 4fr 4fr; */
   
   column-gap: 2%;
@@ -127,7 +127,7 @@ grid-column-start: 2;
 grid-column-end: 3; 
 /* grid-row-start: 1; 
 grid-row-end: 2;  */
-grid-area: 'map1';
+grid-area: 'bar1';
 
 }
 
@@ -136,6 +136,54 @@ grid-column-start: 3;
 grid-column-end: 4; 
 /* grid-row-start: 1; 
 grid-row-end: 2;  */
+grid-area: 'bar2';
+
+}
+#income{
+  display: grid;
+  grid-template-columns: 0.1fr 4fr 0.5fr 0.1fr;
+  /* grid-template-rows: 4fr 4fr 4fr; */
+  
+  column-gap: 2%;
+  row-gap: 10%;
+}
+
+#map-income { 
+grid-column-start: 2; 
+grid-column-end: 3; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
+grid-area: 'map1';
+
+}
+
+#bar-income { 
+grid-column-start: 3; 
+grid-column-end: 4; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
 grid-area: 'map2';
 
+}
+.rect:hover {
+  color: #333;
+  stroke:rgb(31, 30, 30);
+  stroke-width: 2px;
+}
+
+.label {
+  /* fill: white; */
+  fill: black;
+  text-anchor: end;
+  
+}
+.label_bar {
+  fill: white;
+  /* text-align: right; */
+  text-anchor: end;
+  font-size: 16px;
+}
+.axis {
+  font-size: 10px;
+  
 }
