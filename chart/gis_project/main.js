@@ -19,9 +19,9 @@ let projection2;
 let path2;
 let div2;
 
-let width3 = 500;
+let width3 = 540;
 let height3 = 300;
-let margin3 = { top: 20, bottom: 50, left: 40, right: 40 };
+let margin3 = { top: 20, bottom: 50, left: 40, right: 20 };
 
 let svg3;
 let div3;
@@ -208,6 +208,34 @@ function init() {
                 .duration(100)
                 .style('opacity', 0);
         })
+    //LEGENDS
+    const keysText = ["5", "7", "9", "10", "11"]
+    const legendColor = d3.scaleLinear().domain(["5", "7", "9", "10", "11"])
+        .range(["#efefef", "#b4b4b4", "#959595", "#505050", "black"])
+    svg2.selectAll("myrect")
+        .data(keysText)
+        .enter()
+        .append("rect")
+        .attr("width", 30)
+        .attr("height", 11)
+        .attr("stroke", "black")
+        .attr("y", height2 - height2 / 14)
+        .attr("x", function (d, i) { return width2 - width2 / 2.5 - 20 + i * 30 })
+        .style("fill", d => legendColor(d))
+
+    svg2.selectAll("mylabels")
+        .data(keysText)
+        .enter()
+        .append("text")
+        .style("font-size", 10)
+        .attr("y", height2 - height2 / 12)
+        .attr("x", function (d, i) { return width2 - width2 / 2.5 + 5 + i * 30 })
+        .style("fill", "black")
+        .text(d => d)
+        .style("text-anchor", "center")
+        .style("alignment-baseline", "middle")
+
+
 
     //BAR CHART
 
@@ -231,7 +259,7 @@ function init() {
     const xScale = d3
         .scaleLinear()
         .domain([0, d3.max(state.income, d => d.Percentage)])
-        .range([margin3.left + 5, width3 - margin3.right]);
+        .range([margin3.left, width3 - margin3.right]);
 
     console.log("x", xScale.domain(), "y", yScale.domain())
     // reference for d3.axis: https://github.com/d3/d3-axis
@@ -245,11 +273,11 @@ function init() {
         .data(state.income)
         .join("rect")
         .attr("class", "rect")
-        .attr("x", margin3.left + 5)//d => xScale(d.Percentage))
+        .attr("x", margin3.left)//d => xScale(d.Percentage))
         .attr("y", d => yScale(d.Income))
         .attr("height", yScale.bandwidth())
-        .attr("width", d => xScale(d.Percentage))
-        .attr("fill", "grey")
+        .attr("width", d => xScale(d.Percentage) - margin3.right)
+        .attr("fill", "lightgrey")
         .on('mouseover', (event, d) => {
             // console.log("tooltip d", d)
             div3
@@ -277,7 +305,7 @@ function init() {
         .attr("class", "label_bar")
         // this allows us to position the text in the center of the bar
         .attr("y", d => yScale(d.Income))
-        .attr("x", d => xScale(d.Percentage) + 35)
+        .attr("x", d => xScale(d.Percentage) + 10)
         .text(d => d.Income)
         .attr("dy", "1.6em")
 
@@ -285,30 +313,31 @@ function init() {
     svg3
         .append("g")
         .attr("class", "axis x-axis")
-
-        .attr("transform", `translate(0,${height3 - margin3.bottom})`)
+        .attr("transform", `translate(0, ${height3 - margin3.bottom})`)
+        //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
         .call(xAxis)
         .append("text")
         .attr("class", "axis-label")
-        .attr("x", "15%")
-        .attr("dy", "-19em")
+        .attr("x", "18%")
+        .attr("dy", "2.2em")
         .text("Percentage")
-        .attr("font-size", "14")
+        .attr("font-size", "16")
         .attr("fill", "black")
         .attr('opacity', 0.8)
 
     svg3
         .append("g")
         .attr("class", "axis y-axis")
-        .attr("transform", `translate(${margin3.left}, ${margin3.right})`)
+        .attr("transform", `translate(${margin3.left - 10},0)`)
+        // .attr("transform", `translate(${margin3.left}, ${margin3.right})`)
         .call(yAxis)
         .append("text")
         .attr("class", "axis-label")
-        .attr("y", "15%") //in the middle of line
+        .attr("y", "80%") //in the middle of line
         .attr("dx", "-1em")
         .attr("writing-mode", "vertical-rl")
-        .text("Income")
-        .attr("font-size", "14")
+        .text("Annual Household Income")
+        .attr("font-size", "16")
         .attr("fill", "black")
         .attr('opacity', 0.8)
 
