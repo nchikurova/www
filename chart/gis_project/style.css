@@ -108,3 +108,34 @@ grid-row-end: 2;  */
 grid-area: 'map2';
 
 }
+
+.img {
+  width: 600px;
+}
+
+#barchart{
+  display: grid;
+  grid-template-columns: 0.5fr 4fr 4fr 0.5fr;
+  /* grid-template-rows: 4fr 4fr 4fr; */
+  
+  column-gap: 2%;
+  row-gap: 10%;
+}
+
+#bar-one { 
+grid-column-start: 2; 
+grid-column-end: 3; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
+grid-area: 'map1';
+
+}
+
+#bar-two { 
+grid-column-start: 3; 
+grid-column-end: 4; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
+grid-area: 'map2';
+
+}

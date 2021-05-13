@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => {
 
     //console.log(data);
