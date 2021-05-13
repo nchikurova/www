@@ -262,7 +262,7 @@ function init() {
         .range([margin3.left, width3 - margin3.right]);
 
     console.log("x", xScale.domain(), "y", yScale.domain())
-    // reference for d3.axis: https://github.com/d3/d3-axis
+
     const xAxis = d3.axisBottom(xScale).ticks(state.income.length)
     const yAxis = d3.axisLeft(yScale).tickValues([])
 
