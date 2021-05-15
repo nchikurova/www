@@ -29,8 +29,8 @@ let div3;
 let state = {
     geojson: null,
     taxes: null,
-    income: null
-
+    income: null,
+    // avg_cost: null,
 };
 
 /**
@@ -45,11 +45,13 @@ Promise.all([
         Percentage: +d.Percentage,
         Income: d.Income,
     })),
-]).then(([geojson, taxes, income]) => {
+    // d3.csv("../data/Avg_cost_yearly.csv", d3.autoType),
+]).then(([geojson, taxes, income, avg_cost]) => {
     state.geojson = geojson;
     state.taxes = taxes;
     state.income = income;
-    console.log("state: ", state);
+    // state.avg_cost = avg_cost;
+    // console.log("state: ", state);
     init();
 });
 //const formatValue = d3.format(",d")
@@ -261,7 +263,7 @@ function init() {
         .domain([0, d3.max(state.income, d => d.Percentage)])
         .range([margin3.left, width3 - margin3.right]);
 
-    console.log("x", xScale.domain(), "y", yScale.domain())
+    //console.log("x", xScale.domain(), "y", yScale.domain())
 
     const xAxis = d3.axisBottom(xScale).ticks(state.income.length)
     const yAxis = d3.axisLeft(yScale).tickValues([])
@@ -273,7 +275,7 @@ function init() {
         .data(state.income)
         .join("rect")
         .attr("class", "rect")
-        .attr("x", margin3.left)//d => xScale(d.Percentage))
+        .attr("x", margin3.left)
         .attr("y", d => yScale(d.Income))
         .attr("height", yScale.bandwidth())
         .attr("width", d => xScale(d.Percentage) - margin3.right)

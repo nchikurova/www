@@ -46,7 +46,7 @@ header{
 /* Add a color to the active/current link */
 .topnav a.active {
   /* background-color: #04AA6D; */
-  background-color: rgb(220, 196, 226);
+  background-color: rgb(190, 184, 192);
   color: black;
   /* color: white; */
 }
@@ -110,7 +110,7 @@ grid-area: 'map2';
 }
 
 .img {
-  width: 500px;
+  width: 300px;
 }
 
 #barchart{
@@ -183,7 +183,32 @@ grid-area: 'map2';
   text-anchor: end;
   font-size: 16px;
 }
+.label_bar_value {
+  fill: rgb(10, 10, 10);
+  /* text-align: right; */
+  text-anchor: left;
+  font-size: 16px;
+}
 .axis {
   font-size: 10px;
   
+}
+.rect.bar {
+  stroke-width: 1px;
+  stroke: black ;
+}
+
+path.trend {
+  stroke:rgb(4, 110, 27);
+}
+path.trend1 {
+  stroke: rgb(187, 41, 41);
+}
+
+.axis.y-axis-line{
+  font-size: 14px;
+}
+.axis.x-axis-line{
+  font-size: 18px;
+ 
 }
