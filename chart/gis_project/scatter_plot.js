@@ -4,7 +4,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
     //console.log(data);
     let width = 500;
     let height = 400;
-    let margin = { top: 60, bottom: 50, left: 60, right: 40 };
+    let margin = { top: 20, bottom: 50, left: 60, right: 40 };
     let tooltip;
     let xScale;
     let yScale;
@@ -12,7 +12,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
     let div;
     let width_scatter = 460;
     let height_scatter = 400;
-    let margin_scatter = { top: 60, bottom: 50, left: 150, right: 40 };
+    let margin_scatter = { top: 20, bottom: 50, left: 160, right: 40 };
     let xScale_scatter;
     let yScale_scatter;
     let svg_scatter_bar;
@@ -202,33 +202,33 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .attr("class", "label_bar_scatter")// this allows us to position the text in the center of the bar
         .attr("x", margin_scatter.left + 20)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
         .attr("y", d => yScale_scatter(d.LocationDesc))
-        .text(d => `${formatNumber(d.Data_Value) + "$"}`)
+        .text(d => `${"$" + formatNumber(d.Data_Value)}`)
         .attr("dy", "1em");
 
 
     svg_scatter_bar
         .append("g")
-        .attr("class", "axis x-axis-line")
+        .attr("class", "axis x-axis-scatter")
         .attr("transform", `translate(0, ${height_scatter - margin_scatter.bottom})`)
         //.attr("transform", `translate(0, ${ height3 - margin3.bottom})`)
         .call(xAxis_scatter)
         .append("text")
-        .attr("class", "axis-label")
-        .attr("x", "50%")
-        .attr("dy", "2.4em")
+        .attr("class", "axis-label-scatter")
+        .attr("x", "60%")
+        .attr("dy", "2.8em")
         .text("Average Cost Per Pack, $")
-        .attr("font-size", "16")
+        .attr("font-size", "14")
         .attr("fill", "black")
         .attr('opacity', 0.8)
 
     svg_scatter_bar
         .append("g")
-        .attr("class", "axis y-axis-line")
+        .attr("class", "axis y-axis-scatter")
         .attr("transform", `translate(${margin_scatter.left}, 0)`)
 
         .call(yAxis_scatter)
         .append("text")
-        .attr("class", "axis-label")
+        .attr("class", "axis-label-scatter")
     // .attr("y", "40%") //in the middle of line
     // .attr("dx", "-0.7em")
     // .attr("writing-mode", "vertical-rl")

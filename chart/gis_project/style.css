@@ -14,15 +14,15 @@ header{
   padding: 20px;
   text-align:left;
   background:rgb(58, 38, 68);
-  color:whitesmoke;
+  color:rgb(245, 245, 245);
   font-size:20px;
 
 }
-.name {
+.article {
   padding: 20px;
   text-align:left;
-  background:rgb(123, 96, 138);
-  color:whitesmoke;
+  background:rgb(236, 234, 238);
+line-height: 1.5em;
   font-size:20px;
  
 }
@@ -115,7 +115,7 @@ grid-area: 'map2';
 }
 
 .img {
-  width: 300px;
+  width: 800px;
 }
 
 #barchart{
@@ -250,8 +250,11 @@ path.trend1 {
  
 }
 .axis.y-axis-scatter{
-  font-size: 20px;
+  font-size: 16px;
   font-family: 'Lora', serif;
+}
+.label_map_year {
+font-size: 24px;
 }
 /* .axis-label-scatter{
   font-size: 12px;

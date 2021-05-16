@@ -2,7 +2,7 @@
 
 let width = 460;
 let height = 400;
-let margin = { top: 60, bottom: 50, left: 40, right: 40 };
+let margin = { top: 60, bottom: 50, left: 20, right: 40 };
 
 let svg;
 let projection;
@@ -83,27 +83,13 @@ function init() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    const dataYear = state.taxes.filter(d => d.Year === 2015)
+    const dataYear = state.taxes.filter(d => d.Year === 2010)
     //console.log("dataYear", dataYear)
     const newData = new Map(dataYear.map(d => [d.LocationDesc, d.Data_Value]))
     const newDataYear = new Map(dataYear.map(d => [d.LocationDesc, d.Year]))
 
 
     const colorScale = d3.scaleLinear().range(["whitesmoke", "black"]).domain([3, d3.max(state.taxes, d => d.Data_Value)])
-    //console.log(colorScale.domain())
-    // svg
-    //     .selectAll(".state")
-    //     // all of the features of the geojson, meaning all the states as individuals
-    //     .data(state.geojson.features)
-    //     .join("path")
-    //     .attr("d", path)
-    //     .attr("stroke-linejoin", "round")
-    //     .attr("class", "state")
-    //     .attr("fill", "grey")
-    //     .attr('opacity', 0.5)
-
-    // draw();
-
 
     svg
         .selectAll(".state")
@@ -142,6 +128,16 @@ function init() {
                 .style('opacity', 0);
         })
 
+
+    const text_map = svg
+        .selectAll("text.year")
+        .data(["2010"])
+        .join("text")
+        .attr("class", "label_map_year")// this allows us to position the text in the center of the bar
+        .attr("x", width2 / 4)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
+        .attr("y", height / 40)
+        .text(d => d)
+        .attr("dy", "1em");
     // SECOND MAP
     projection2 = d3.geoAlbersUsa().fitSize([width2, height2], state.geojson);
     path2 = d3.geoPath().projection(projection2);
@@ -221,7 +217,7 @@ function init() {
         .attr("width", 30)
         .attr("height", 11)
         .attr("stroke", "black")
-        .attr("y", height2 - height2 / 14)
+        .attr("y", height2 / 10)
         .attr("x", function (d, i) { return width2 - width2 / 2.5 - 20 + i * 30 })
         .style("fill", d => legendColor(d))
 
@@ -230,12 +226,31 @@ function init() {
         .enter()
         .append("text")
         .style("font-size", 10)
-        .attr("y", height2 - height2 / 12)
+        .attr("y", height2 / 12)
         .attr("x", function (d, i) { return width2 - width2 / 2.5 + 5 + i * 30 })
         .style("fill", "black")
         .text(d => d)
         .style("text-anchor", "center")
         .style("alignment-baseline", "middle")
+
+    const text1 = svg2
+        .selectAll("text.map")
+        .data(["Average Cost Per Pack, $"])
+        .join("text")
+        .attr("class", "label_map")// this allows us to position the text in the center of the bar
+        .attr("x", width2 / 2)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
+        .attr("y", height / 60)
+        .text(d => d)
+        .attr("dy", "1em");
+    const text_map2 = svg2
+        .selectAll("text.year")
+        .data(["2019"])
+        .join("text")
+        .attr("class", "label_map_year")// this allows us to position the text in the center of the bar
+        .attr("x", width2 / 4)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
+        .attr("y", height / 40)
+        .text(d => d)
+        .attr("dy", "1em");
 
 
 
