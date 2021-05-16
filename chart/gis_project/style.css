@@ -5,10 +5,15 @@ body {
   margin-right: 7%; */
 /* font-family: 'Source Sans Pro', sans-serif; */
 }
+#body-wrapper {
+ margin-left: 7%;
+  margin-right: 7%; 
+
+}
 header{
   padding: 20px;
   text-align:left;
-  background:rgb(71, 70, 70);
+  background:rgb(58, 38, 68);
   color:whitesmoke;
   font-size:20px;
 
@@ -16,14 +21,14 @@ header{
 .name {
   padding: 20px;
   text-align:left;
-  background:rgb(71, 70, 70);
+  background:rgb(123, 96, 138);
   color:whitesmoke;
   font-size:20px;
  
 }
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: rgb(104, 89, 114);
   overflow: hidden;
 }
 
@@ -165,6 +170,28 @@ grid-row-end: 2;  */
 grid-area: 'map2';
 
 }
+
+#scatter-wrap{
+  display: grid;
+  grid-template-columns: 0.1fr 4fr 4fr 0.1fr;
+  column-gap: 0.01%;
+}
+
+#scatter-container { 
+grid-column-start: 2; 
+grid-column-end: 3; 
+grid-area: 'scatter1';
+
+}
+
+#scatter-bar { 
+grid-column-start: 3; 
+grid-column-end: 4; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
+grid-area: 'scatter2';
+
+}
 .rect:hover {
   color: #333;
   stroke:rgb(31, 30, 30);
@@ -189,10 +216,16 @@ grid-area: 'map2';
   text-anchor: left;
   font-size: 16px;
 }
-.axis {
+.label_bar_scatter {
+  fill: rgb(10, 10, 10);
+  /* text-align: right; */
+  text-anchor: left;
+  font-size: 16px;
+}
+/* .axis {
   font-size: 10px;
   
-}
+} */
 .rect.bar {
   stroke-width: 1px;
   stroke: black ;
@@ -212,3 +245,14 @@ path.trend1 {
   font-size: 18px;
  
 }
+.axis.x-axis-scatter{
+  font-size: 16px;
+ 
+}
+.axis.y-axis-scatter{
+  font-size: 20px;
+  font-family: 'Lora', serif;
+}
+/* .axis-label-scatter{
+  font-size: 12px;
+} */
