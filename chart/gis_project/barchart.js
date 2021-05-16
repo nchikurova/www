@@ -5,9 +5,9 @@ Promise.all([
     d3.csv("../data/topten.csv")])
     .then(([data_bar]) => {
         // console.log("data_bar", data_bar);
-        let width_bar = 540;
+        let width_bar = 500;
         let height_bar = 400;
-        let margin_bar = { top: 60, bottom: 50, left: 20, right: 40 };
+        let margin_bar = { top: 60, bottom: 50, left: 150, right: 40 };
 
 
         const svg_barchart = d3
@@ -39,7 +39,7 @@ Promise.all([
         //console.log("x_bar", xScale_bar.domain(), "y_bar", yScale_bar.domain())
         // reference for d3.axis: https://github.com/d3/d3-axis
         const xAxis_bar = d3.axisBottom(xScale_bar)//.ticks(data_bar.length)
-        const yAxis_bar = d3.axisLeft(yScale_bar).tickValues([])
+        const yAxis_bar = d3.axisLeft(yScale_bar)//.tickValues([])
 
         svg_barchart
             .selectAll("rect")
@@ -49,7 +49,7 @@ Promise.all([
             .attr("y", d => yScale_bar(d.LocationDesc))
             .attr("x", margin_bar.left)//d => xScale_bar(d))
             .attr("height", yScale_bar.bandwidth())
-            .attr("width", d => xScale_bar(d.Data_Value) - margin_bar.right)
+            .attr("width", d => xScale_bar(d.Data_Value) - margin_bar.left)
             .attr("fill", "lightgrey")
 
             .on('mouseover', (event, d) => {
@@ -81,17 +81,17 @@ Promise.all([
             .attr("class", "label_bar")// this allows us to position the text in the center of the bar
             .attr("x", d => xScale_bar(d.Data_Value))// + (xScale.bandwidth() / 2))
             .attr("y", d => yScale_bar(d.LocationDesc))
-            .text(d => `${d.LocationDesc + + d.Data_Value + "%"}`)
+            .text(d => `${d.Data_Value + "%"}`)
             .attr("dy", "1em");
-        const text2 = svg_barchart
-            .selectAll("text")
-            .data(data_bar)
-            .join("text")
-            .attr("class", "label_bar_value")// this allows us to position the text in the center of the bar
-            .attr("x", margin_bar.left + 30)// + (xScale.bandwidth() / 2))
-            .attr("y", d => yScale_bar(d.LocationDesc))
-            .text(d => `${d.LocationDesc}`)
-            .attr("dy", "1em");
+        // const text2 = svg_barchart
+        //     .selectAll("text")
+        //     .data(data_bar)
+        //     .join("text")
+        //     .attr("class", "label_bar_value")// this allows us to position the text in the center of the bar
+        //     .attr("x", margin_bar.left + 30)// + (xScale.bandwidth() / 2))
+        //     .attr("y", d => yScale_bar(d.LocationDesc))
+        //     .text(d => `${d.LocationDesc}`)
+        //     .attr("dy", "1em");
 
         svg_barchart
             .append("g")
@@ -110,7 +110,7 @@ Promise.all([
 
         svg_barchart
             .append("g")
-            .attr("class", "axis y-axis")
+            .attr("class", "axis y-axis-scatter")
             .attr("transform", `translate(${margin_bar.left},0)`)
 
             .call(yAxis_bar)
