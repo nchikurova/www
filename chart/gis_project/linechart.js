@@ -19,6 +19,8 @@ Promise.all([
         let margin_line = { top: 60, bottom: 50, left: 60, right: 40 };
 
         //console.log("cost", cost)
+
+        const formatValue = d3.format(" $.2f")
         const svg_linechart = d3
             .select("#linechart")
             .append("svg")
@@ -50,7 +52,7 @@ Promise.all([
         // reference for d3.axis: https://github.com/d3/d3-axis
         const xAxis_line = d3.axisBottom(xScale_line).tickFormat(d3.format("d"))
         const yAxis_consump = d3.axisLeft(yScale_consump)//.tickValues([])
-        const yAxis_cost = d3.axisRight(yScale_cost)
+        const yAxis_cost = d3.axisRight(yScale_cost).tickFormat(d3.format("$.1f"))
         // const xAxis_cost = d3.axisBottom(xScale_cost).tickFormat(d3.format("d")).tickValues([])//tickFormat(d3.format("d"))
 
 
@@ -125,7 +127,7 @@ Promise.all([
             .attr("y", "80%") //in the middle of line
             .attr("dx", "-27em")
             //.attr("transform", "rotate(-35)")
-            .text("Average Cost")
+            .text("Average Cost, $")
             .attr("font-size", "16")
             .attr("fill", "black")
             .attr('opacity', 0.8)

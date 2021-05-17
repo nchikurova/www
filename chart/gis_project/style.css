@@ -231,15 +231,16 @@ small {
 }
 #arcgis-wrapper{
   display: grid;
-  grid-template-columns:  4fr 4fr 4fr;
- grid-template-rows: 4fr 1fr ;
+  grid-template-columns:  4fr 4fr 2fr;
+  column-gap: 1%;
+ /* grid-template-rows: 4fr 1fr ; */
 }
 
 #arcgis-map { 
 grid-column-start: 1; 
 grid-column-end: 3; 
-grid-row-start: 1; 
-grid-row-end: 3; 
+/* grid-row-start: 1; 
+grid-row-end: 3;  */
 grid-area: 'arc1';
 
 }
@@ -247,8 +248,8 @@ grid-area: 'arc1';
 #barchart-region { 
 grid-column-start: 3; 
 grid-column-end: 4; 
-grid-row-start: 1; 
-grid-row-end: 2; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
 grid-area: 'arc2';
 
 }

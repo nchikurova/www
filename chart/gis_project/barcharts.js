@@ -30,9 +30,9 @@ Promise.all([
         let height_fed = 400;
         let margin_fed = { top: 20, bottom: 50, left: 200, right: 20 };
 
-        let width_reg = 400;
-        let height_reg = 220;
-        let margin_reg = { top: 0, bottom: 20, left: 100, right: 20 };
+        let width_reg = 360;
+        let height_reg = 200;
+        let margin_reg = { top: 20, bottom: 40, left: 100, right: 20 };
 
         const svg_barchart = d3
             .select("#bar-two")
@@ -407,7 +407,7 @@ Promise.all([
             .attr("y", d => yScale_reg(d.Region))
             .attr("x", margin_reg.left + 20)//d => xScale(d.Percentage))
             .text(d => `${d.Percentage + "%"}`)
-            .attr("dy", "1.6em")
+            .attr("dy", "1.2em")
 
 
         svg_reg
@@ -416,14 +416,14 @@ Promise.all([
             .attr("transform", `translate(0, ${height_reg - margin_reg.bottom})`)
             //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
             .call(xAxis_reg)
-        // .append("text")
-        // .attr("class", "axis-label")
-        // .attr("x", "50%")
-        // .attr("dy", "2.2em")
-        // .text("Percentage")
-        // .attr("font-size", "16")
-        // .attr("fill", "black")
-        // .attr('opacity', 0.8)
+            .append("text")
+            .attr("class", "axis-label")
+            .attr("x", "50%")
+            .attr("dy", "2.2em")
+            .text("Percentage")
+            .attr("font-size", "16")
+            .attr("fill", "black")
+            .attr('opacity', 0.8)
 
         svg_reg
             .append("g")
