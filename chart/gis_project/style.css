@@ -202,25 +202,56 @@ grid-area: 'scatter2';
 }
 #linechart-wrapper{
   display: grid;
-  grid-template-columns: 2fr  5fr 2fr;
+  grid-template-columns: 2fr 5fr 2fr;
   column-gap: 0.01%;
 }
-/* 
-#linechartone { 
-grid-column-start: 2; 
+
+.embed-container {
+  position: relative;
+  padding-bottom: 60%;
+  height: 0;
+  max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+small {
+  position: absolute;
+  z-index: 40;
+  bottom: 0;
+  margin-bottom: -15px;
+}
+#arcgis-wrapper{
+  display: grid;
+  grid-template-columns:  4fr 4fr 4fr;
+ grid-template-rows: 4fr 1fr ;
+}
+
+#arcgis-map { 
+grid-column-start: 1; 
 grid-column-end: 3; 
-grid-area: 'scatter1';
+grid-row-start: 1; 
+grid-row-end: 3; 
+grid-area: 'arc1';
 
 }
 
-#scatter-bar { 
+#barchart-region { 
 grid-column-start: 3; 
 grid-column-end: 4; 
-/* grid-row-start: 1; 
-grid-row-end: 2;  */
-/* grid-area: 'scatter2';
+grid-row-start: 1; 
+grid-row-end: 2; 
+grid-area: 'arc2';
 
-} */ 
+}
 .rect:hover {
   color: #333;
   stroke:rgb(31, 30, 30);

@@ -10,10 +10,14 @@ Promise.all([
     d3.csv("../data/fed_tax_topten.csv", d => ({
         LocationDesc: d.LocationDesc,
         Data_Value: +d.Data_Value
+    })),
+    d3.csv("../data/by_region.csv", d => ({
+        Region: d["U.S. Census Region"],
+        Percentage: +d.Percentage
     }))
 ])
-    .then(([data_bar, data_bar2, data_fed]) => {
-        console.log("data_fed", data_fed);
+    .then(([data_bar, data_bar2, data_fed, data_reg]) => {
+        console.log("data_region", data_reg);
         let width_bar = 500;
         let height_bar = 400;
         let margin_bar = { top: 20, bottom: 50, left: 160, right: 40 };
@@ -25,6 +29,10 @@ Promise.all([
         let width_fed = 500;
         let height_fed = 400;
         let margin_fed = { top: 20, bottom: 50, left: 200, right: 20 };
+
+        let width_reg = 400;
+        let height_reg = 220;
+        let margin_reg = { top: 0, bottom: 20, left: 100, right: 20 };
 
         const svg_barchart = d3
             .select("#bar-two")
@@ -129,17 +137,7 @@ Promise.all([
             .append("g")
             .attr("class", "axis y-axis-scatter")
             .attr("transform", `translate(${margin_bar.left},0)`)
-
             .call(yAxis_bar)
-        // .append("text")
-        // .attr("class", "axis-label")
-        // .attr("y", "40%") //in the middle of line
-        // .attr("dx", "-0.7em")
-        // .attr("writing-mode", "vertical-rl")
-        // .text("State")
-        // .attr("font-size", "16")
-        // .attr("fill", "black")
-        // .attr('opacity', 0.8)
 
         // EDUCATION BARCHART
 
@@ -149,11 +147,9 @@ Promise.all([
             .attr("width", width_bar2)
             .attr("height", height_bar2);
 
-
         const div_bar2 = d3.select("body").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
-
 
         const yScale_bar2 = d3
             .scaleBand()
@@ -339,6 +335,101 @@ Promise.all([
             .attr("class", "axis y-axis-scatter")
             .attr("transform", `translate(${margin_fed.left},0)`)
             .call(yAxis_fed)
+
+        ///////////------------------//////////////////
+        //BAR CHART BY REGION
+
+        const svg_reg = d3
+            .select("#barchart-region")
+            .append("svg")
+            .attr("width", width_reg)
+            .attr("height", height_reg);
+
+        const div_reg = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0)
+
+        const yScale_reg = d3
+            .scaleBand()
+            .domain(["Midwest", "South", "Northeast", "West"])
+            .range([margin_reg.top, height_reg - margin_reg.bottom])
+            .paddingInner(0.2)
+            .paddingOuter(0.2)
+
+        const xScale_reg = d3
+            .scaleLinear()
+            .domain([0, d3.max(data_reg, d => d.Percentage)])
+            .range([margin_reg.left, width_reg - margin_reg.right]);
+
+        //console.log("x", xScale.domain(), "y", yScale.domain())
+
+        const xAxis_reg = d3.axisBottom(xScale_reg)//.ticks(state.income.length)
+        const yAxis_reg = d3.axisLeft(yScale_reg)//.tickValues([])
+
+        // reference for d3.axis: https://github.com/d3/d3-axis
+
+        svg_reg
+            .selectAll("rect")
+            .data(data_reg)
+            .join("rect")
+            .attr("class", "rect")
+            .attr("x", margin_reg.left)
+            .attr("y", d => yScale_reg(d.Region))
+            .attr("height", yScale_reg.bandwidth())
+            .attr("width", d => xScale_reg(d.Percentage) - margin_reg.left)
+            .attr("fill", "lightgrey")
+            .on('mouseover', (event, d) => {
+                // console.log("tooltip d", d)
+                div_reg
+                    .transition()
+                    .duration(50)
+                    .style('opacity', 1);
+                div_reg
+                    .html("U.S. Census Region: " + "<h3><strong>" + d.Region + "</strong></h3>" +
+                        "Percentage: " + "<strong>" + d.Percentage + "%" + "</strong>"
+                    )
+
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on('mouseout', () => {
+                div_reg
+                    .transition()
+                    .duration(100)
+                    .style('opacity', 0);
+            })
+        svg_reg
+            .selectAll("text")
+            .data(data_reg)
+            .join("text")
+            .attr("class", "label_bar")
+            // this allows us to position the text in the center of the bar
+            .attr("y", d => yScale_reg(d.Region))
+            .attr("x", margin_reg.left + 20)//d => xScale(d.Percentage))
+            .text(d => `${d.Percentage + "%"}`)
+            .attr("dy", "1.6em")
+
+
+        svg_reg
+            .append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", `translate(0, ${height_reg - margin_reg.bottom})`)
+            //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
+            .call(xAxis_reg)
+        // .append("text")
+        // .attr("class", "axis-label")
+        // .attr("x", "50%")
+        // .attr("dy", "2.2em")
+        // .text("Percentage")
+        // .attr("font-size", "16")
+        // .attr("fill", "black")
+        // .attr('opacity', 0.8)
+
+        svg_reg
+            .append("g")
+            .attr("class", "axis y-axis-scatter")
+            .attr("transform", `translate(${margin_reg.left},0)`)
+            .call(yAxis_reg)
 
 
     })
