@@ -11,7 +11,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
     let svg_scatter;
     let div;
     let width_scatter = 460;
-    let height_scatter = 400;
+    let height_scatter = 340;
     let margin_scatter = { top: 20, bottom: 50, left: 160, right: 40 };
     let xScale_scatter;
     let yScale_scatter;

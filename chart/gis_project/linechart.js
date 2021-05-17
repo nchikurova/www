@@ -108,11 +108,10 @@ Promise.all([
             .call(yAxis_consump)
             .append("text")
             .attr("class", "axis-label")
-            .attr("y", "30%") //in the middle of line
-            .attr("dx", "7em")
-            //.attr("writing-mode", "vertical-rl")
-            .text("Consumption")
-            .attr("font-size", "16")
+            .attr("y", "28%") //in the middle of line
+            .attr("dx", "6.7em")
+            .text("Consumption ")
+            .attr("font-size", "17")
             .attr("fill", "black")
             .attr('opacity', 0.8)
 

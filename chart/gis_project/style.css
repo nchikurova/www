@@ -5,11 +5,7 @@ body {
   margin-right: 7%; */
 /* font-family: 'Source Sans Pro', sans-serif; */
 }
-#body-wrapper {
- margin-left: 7%;
-  margin-right: 7%; 
 
-}
 header{
   padding: 20px;
   text-align:left;
@@ -18,14 +14,7 @@ header{
   font-size:20px;
 
 }
-.article {
-  padding: 20px;
-  text-align:left;
-  background:rgb(236, 234, 238);
-line-height: 1.5em;
-  font-size:20px;
- 
-}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: rgb(104, 89, 114);
@@ -74,6 +63,21 @@ div.tooltip {
     border-width: thin;	
     /* line-height: 0.2;	 */
   }
+
+  #body-wrapper {
+    margin-left: 7%;
+     margin-right: 7%; 
+   
+   }
+
+   .article {
+    padding: 20px;
+    text-align:left;
+    background:rgb(243, 241, 245);
+  line-height: 1.5em;
+    font-size:20px;
+   
+  }
 path.state {
     stroke: white;
     stroke-width: 0.5;
@@ -83,10 +87,13 @@ path.state:hover {
     stroke: black;
     stroke-width: 2px;
   }
-.text{
+/* .text{
   font-size: 8;
+} */
+.title {
+  background-color: rgb(236, 229, 238);
+  padding: 10px;
 }
-
 #map-containers{
   display: grid;
   grid-template-columns: 0.5fr 4fr 4fr 0.5fr;
@@ -115,7 +122,8 @@ grid-area: 'map2';
 }
 
 .img {
-  width: 800px;
+  /* width: 800px; */
+  width:100%
 }
 
 #barchart{
@@ -153,7 +161,7 @@ grid-area: 'bar2';
   row-gap: 10%;
 }
 
-#map-income { 
+#bar-education { 
 grid-column-start: 2; 
 grid-column-end: 3; 
 /* grid-row-start: 1; 
@@ -192,6 +200,27 @@ grid-row-end: 2;  */
 grid-area: 'scatter2';
 
 }
+#linechart-wrapper{
+  display: grid;
+  grid-template-columns: 2fr  5fr 2fr;
+  column-gap: 0.01%;
+}
+/* 
+#linechartone { 
+grid-column-start: 2; 
+grid-column-end: 3; 
+grid-area: 'scatter1';
+
+}
+
+#scatter-bar { 
+grid-column-start: 3; 
+grid-column-end: 4; 
+/* grid-row-start: 1; 
+grid-row-end: 2;  */
+/* grid-area: 'scatter2';
+
+} */ 
 .rect:hover {
   color: #333;
   stroke:rgb(31, 30, 30);
@@ -207,8 +236,8 @@ grid-area: 'scatter2';
 .label_bar {
   fill: rgb(10, 10, 10);
   /* text-align: right; */
-  text-anchor: end;
-  font-size: 16px;
+  text-anchor: left;
+  font-size: 18px;
 }
 .label_bar_value {
   fill: rgb(10, 10, 10);

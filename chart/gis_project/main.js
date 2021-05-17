@@ -19,9 +19,9 @@ let projection2;
 let path2;
 let div2;
 
-let width3 = 540;
+let width3 = 400;
 let height3 = 300;
-let margin3 = { top: 20, bottom: 50, left: 40, right: 20 };
+let margin3 = { top: 0, bottom: 50, left: 40, right: 20 };
 
 let svg3;
 let div3;
@@ -138,6 +138,8 @@ function init() {
         .attr("y", height / 40)
         .text(d => d)
         .attr("dy", "1em");
+
+
     // SECOND MAP
     projection2 = d3.geoAlbersUsa().fitSize([width2, height2], state.geojson);
     path2 = d3.geoPath().projection(projection2);
@@ -293,7 +295,7 @@ function init() {
         .attr("x", margin3.left)
         .attr("y", d => yScale(d.Income))
         .attr("height", yScale.bandwidth())
-        .attr("width", d => xScale(d.Percentage) - margin3.right)
+        .attr("width", d => xScale(d.Percentage) - margin3.left)
         .attr("fill", "lightgrey")
         .on('mouseover', (event, d) => {
             // console.log("tooltip d", d)
@@ -322,7 +324,7 @@ function init() {
         .attr("class", "label_bar")
         // this allows us to position the text in the center of the bar
         .attr("y", d => yScale(d.Income))
-        .attr("x", d => xScale(d.Percentage) + 10)
+        .attr("x", margin3.left + 20)//d => xScale(d.Percentage))
         .text(d => d.Income)
         .attr("dy", "1.6em")
 
@@ -345,7 +347,7 @@ function init() {
     svg3
         .append("g")
         .attr("class", "axis y-axis")
-        .attr("transform", `translate(${margin3.left - 10},0)`)
+        .attr("transform", `translate(${margin3.left},0)`)
         // .attr("transform", `translate(${margin3.left}, ${margin3.right})`)
         .call(yAxis)
         .append("text")
