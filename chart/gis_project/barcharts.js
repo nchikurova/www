@@ -18,7 +18,7 @@ Promise.all([
 ])
     .then(([data_bar, data_bar2, data_fed, data_reg]) => {
         console.log("data_region", data_reg);
-        let width_bar = 500;
+        let width_bar = 480;
         let height_bar = 400;
         let margin_bar = { top: 20, bottom: 50, left: 160, right: 40 };
 
