@@ -215,7 +215,7 @@ function init() {
         .attr("width", 30)
         .attr("height", 11)
         .attr("stroke", "black")
-        .attr("y", "87%")//height2 / 10)
+        .attr("y", "87%")
         .attr("x", function (d, i) { return width2 - width2 / 2.5 - 20 + i * 30 })
         .style("fill", d => legendColor(d))
 
@@ -224,7 +224,7 @@ function init() {
         .enter()
         .append("text")
         .style("font-size", 12)
-        .attr("y", "93%")//height2 - height2 / 50)
+        .attr("y", "93%")
         .attr("x", function (d, i) { return width2 - width2 / 2.5 + 5 + i * 30 })
         .style("fill", "black")
         .text(d => d)
@@ -235,9 +235,9 @@ function init() {
         .selectAll("text.map")
         .data(["Average Cost Per Pack, $"])
         .join("text")
-        .attr("class", "label_map")// this allows us to position the text in the center of the bar
-        .attr("x", width2 / 2)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
-        .attr("y", '81%')//height2 - height2 / 30)
+        .attr("class", "label_map")
+        .attr("x", width2 / 2)
+        .attr("y", '81%')
         .text(d => d)
         .attr("dy", "1em");
 
@@ -245,8 +245,8 @@ function init() {
         .selectAll("text.year")
         .data(["2019"])
         .join("text")
-        .attr("class", "label_map_year")// this allows us to position the text in the center of the bar
-        .attr("x", width2 / 4)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
+        .attr("class", "label_map_year")
+        .attr("x", width2 / 4)
         .attr("y", height / 40)
         .text(d => d)
         .attr("dy", "1em");
@@ -319,9 +319,8 @@ function init() {
         .data(state.income)
         .join("text")
         .attr("class", "label_bar")
-        // this allows us to position the text in the center of the bar
         .attr("y", d => yScale(d.Income))
-        .attr("x", margin3.left + 10)//d => xScale(d.Percentage))
+        .attr("x", margin3.left + 10)
         .text(d => d.Income)
         .attr("dy", "1.6em")
 
@@ -330,7 +329,6 @@ function init() {
         .append("g")
         .attr("class", "axis x-axis")
         .attr("transform", `translate(0, ${height3 - margin3.bottom})`)
-        //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
         .call(xAxis)
         .append("text")
         .attr("class", "axis-label")
@@ -351,7 +349,6 @@ function init() {
         .attr("transform", "rotate(-90)")
         .attr("y", -margin.left + 10)
         .attr("x", -margin.top + 20)
-
         .text("Annual Household Income")
         .attr("font-size", "16")
         .attr("fill", "black")

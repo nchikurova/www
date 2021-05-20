@@ -294,7 +294,7 @@ Promise.all([
             .data(data_bar2)
             .join("text")
             .attr("class", "label_bar")
-            .attr("x", margin_bar2.left + 35)
+            .attr("x", margin_bar2.left + 30)
             .attr("y", d => yScale_bar2(d.Education))
             .text(d => `${d.Data_Value + "%"}`)
             .attr("dy", "1.2em");
