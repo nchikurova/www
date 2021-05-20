@@ -2,17 +2,17 @@
 d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => {
 
     //console.log(data);
-    let width = 480;
-    let height = 400;
-    let margin = { top: 20, bottom: 50, left: 60, right: 40 };
+    let width = 500;
+    let height = 420;
+    let margin = { top: 20, bottom: 50, left: 60, right: 20 };
     let tooltip;
     let xScale;
     let yScale;
     let svg_scatter;
     let div;
-    let width_scatter = 440;
-    let height_scatter = 360;
-    let margin_scatter = { top: 20, bottom: 50, left: 160, right: 40 };
+    let width_scatter = 360;
+    let height_scatter = 340;
+    let margin_scatter = { top: 20, bottom: 20, left: 160, right: 20 };
     let xScale_scatter;
     let yScale_scatter;
     let svg_scatter_bar;
@@ -44,7 +44,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .append("svg")
         .attr("width", width)
         .attr("height", height);
-    // .attr("viewBox", "0 0 600 420")
+    // .attr("viewBox", "0 0 300 320")
     // .append("g")
     // .attr("transform", "translate(0,0)")
 
@@ -134,8 +134,11 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
     svg_scatter_bar = d3
         .select("#scatter-bar")
         .append("svg")
-        .attr("width", width_scatter)
-        .attr("height", height_scatter);
+        // .attr("width", width_scatter)
+        // .attr("height", height_scatter);
+        .attr("viewBox", "0 0 400 340")
+        .append("g")
+        .attr("transform", "translate(0,0)")
 
     div_scatter = d3.select("body").append("div")
         .attr("class", "tooltip")
