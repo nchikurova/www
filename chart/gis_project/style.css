@@ -153,7 +153,7 @@ grid-row-end: 2;  */
 grid-area: 'bar2';
 
 }
-#income{
+#category{
   display: grid;
   grid-template-columns: 0.1fr 4fr 0.5fr 0.1fr;
   /* grid-template-rows: 4fr 4fr 4fr; */
@@ -246,7 +246,7 @@ grid-area: 'arc1';
 
 }
 
-#barchart-region { 
+#bar-region { 
 grid-column-start: 3; 
 grid-column-end: 4; 
 /* grid-row-start: 1; 
@@ -255,6 +255,11 @@ grid-area: 'arc2';
 
 }
 .rect:hover {
+  color: #333;
+  stroke:rgb(31, 30, 30);
+  stroke-width: 2px;
+}
+.rect.rect.bar:hover {
   color: #333;
   stroke:rgb(31, 30, 30);
   stroke-width: 2px;

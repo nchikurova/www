@@ -2,10 +2,7 @@
 
 
 Promise.all([
-    // d3.csv("../data/Avg_consump_per_capita_yearly.csv", d => ({
-    //     Avg_consum_per_capita: +d.Avg_consum_per_capita,
-    //     Year: d.Year,
-    // })),
+
     d3.csv("../data/Avg_cost_consum.csv", d => ({
         Avg_cost: +d.Avg_cost,
         Avg_consum_per_capita: +d.Avg_consum_per_capita,
@@ -20,7 +17,6 @@ Promise.all([
 
         //console.log("cost", cost)
 
-        const formatValue = d3.format(" $.2f")
         const svg_linechart = d3
             .select("#linechart")
             .append("svg")

@@ -18,43 +18,136 @@ Promise.all([
 ])
     .then(([data_bar, data_bar2, data_fed, data_reg]) => {
         console.log("data_region", data_reg);
-        let width_bar = 480;
-        let height_bar = 400;
-        let margin_bar = { top: 20, bottom: 50, left: 160, right: 40 };
 
-        let width_bar2 = 500;
-        let height_bar2 = 360;
-        let margin_bar2 = { top: 20, bottom: 50, left: 235, right: 20 };
-
-        let width_fed = 500;
+        let width_fed = 440; //bar-one
         let height_fed = 400;
         let margin_fed = { top: 20, bottom: 50, left: 200, right: 20 };
 
-        let width_reg = 360;
+        let width_bar = 440; //bar-two
+        let height_bar = 400;
+        let margin_bar = { top: 20, bottom: 50, left: 160, right: 40 };
+
+        let width_bar2 = 500; //bar-education
+        let height_bar2 = 360;
+        let margin_bar2 = { top: 20, bottom: 50, left: 235, right: 20 };
+
+
+        let width_reg = 360; //bar-region
         let height_reg = 200;
         let margin_reg = { top: 20, bottom: 40, left: 100, right: 20 };
 
+        // FEDERAL AND STATE TAX TOP TEN BARCHART
+
+        const svg_fed = d3
+            .select("#bar-one")
+            .append("svg")
+            .attr("width", width_fed)
+            .attr("height", height_fed);
+
+
+        const div_fed = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+
+        const yScale_fed = d3
+            .scaleBand()
+            .domain(["District of Columbia", "Connecticut", "New York", "Rhode Island", "Minnesota", "Massachusetts", "Hawaii", "Vermont", "Washington",])
+            .range([margin_fed.top, height_fed - margin_fed.bottom])
+            .paddingInner(0.2)
+            .paddingOuter(0.2);
+
+
+        const xScale_fed = d3
+            .scaleLinear()
+            .domain([0, d3.max(data_fed, d => d.Data_Value)])//58])
+            .range([margin_fed.left, width_fed - margin_fed.right]);
+
+        //console.log("x_bar", xScale_bar.domain(), "y_bar", yScale_bar.domain())
+        // reference for d3.axis: https://github.com/d3/d3-axis
+        const xAxis_fed = d3.axisBottom(xScale_fed)//.ticks(data_bar.length)
+        const yAxis_fed = d3.axisLeft(yScale_fed)//.tickValues([])
+
+        svg_fed
+            .selectAll("rect")
+            .data(data_fed)
+            .join("rect")
+            .attr("class", "rect.bar")
+            .attr("y", d => yScale_fed(d.LocationDesc))
+            .attr("x", margin_fed.left)
+            .attr("height", yScale_fed.bandwidth())
+            .attr("width", d => xScale_fed(d.Data_Value) - margin_fed.left)
+            .attr("fill", "lightgrey")//"rgb(190, 184, 192)")
+
+            .on('mouseover', (event, d) => {
+                // console.log("tooltip d", d)
+                div_fed
+                    .transition()
+                    .duration(50)
+                    .style('opacity', 1);
+                div_fed
+                    .html("State: " + "<h3><strong>" + d.LocationDesc + "</strong></h3>" +
+                        "Federal and State Tax: " + "<strong>" + d.Data_Value + "</strong>"
+                    )
+
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on('mouseout', () => {
+                div_fed
+                    .transition()
+                    .duration(100)
+                    .style('opacity', 0);
+            })
+
+        // append text
+        const text5 = svg_fed
+            .selectAll("text")
+            .data(data_fed)
+            .join("text")
+            .attr("class", "label_bar")
+            .attr("x", margin_fed.left + 20)
+            .attr("y", d => yScale_fed(d.LocationDesc))
+            .text(d => `${"$" + d.Data_Value}`)
+            .attr("dy", "1em");
+
+        svg_fed
+            .append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", `translate(0, ${height_fed - margin_fed.bottom})`)
+            .call(xAxis_fed)
+            .append("text")
+            .attr("class", "axis-label")
+            .attr("x", "60%")
+            .attr("dy", "2.2em")
+            .text("Federal and State Tax, $")
+            .attr("font-size", "16")
+            .attr("fill", "black")
+            .attr('opacity', 0.8)
+
+        svg_fed
+            .append("g")
+            .attr("class", "axis y-axis-scatter")
+            .attr("transform", `translate(${margin_fed.left},0)`)
+            .call(yAxis_fed)
+
+        // TOP 10 STATES WITH THE HIGHEST FED AND STATE TAX AS A % OF RETAIL PRICE
         const svg_barchart = d3
             .select("#bar-two")
             .append("svg")
             .attr("width", width_bar)
             .attr("height", height_bar);
 
-
         const div_bar = d3.select("body").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-
         const yScale_bar = d3
             .scaleBand()
             .domain(["District of Columbia", "Connecticut", "Rhode Island", "New York", "Minnesota", "California", "Washington", "Vermont", "Massachusetts", "New Jersey"])
-
-            //.domain(data_bar, d => d['LocationDesc'])
             .range([margin_bar.top, height_bar - margin_bar.bottom])
             .paddingInner(0.2)
             .paddingOuter(0.2);
-
 
         const xScale_bar = d3
             .scaleLinear()
@@ -76,7 +169,6 @@ Promise.all([
             .attr("height", yScale_bar.bandwidth())
             .attr("width", d => xScale_bar(d.Data_Value) - margin_bar.left)
             .attr("fill", "rgb(190, 184, 192)")
-
             .on('mouseover', (event, d) => {
                 // console.log("tooltip d", d)
                 div_bar
@@ -103,26 +195,16 @@ Promise.all([
             .selectAll("text")
             .data(data_bar)
             .join("text")
-            .attr("class", "label_bar")// this allows us to position the text in the center of the bar
-            .attr("x", margin_bar.left + 20)//d => xScale_bar(d.Data_Value) - 20)// + (xScale.bandwidth() / 2))
+            .attr("class", "label_bar")
+            .attr("x", margin_bar.left + 20)
             .attr("y", d => yScale_bar(d.LocationDesc))
             .text(d => `${d.Data_Value + "%"}`)
             .attr("dy", "1em");
-        // const text2 = svg_barchart
-        //     .selectAll("text")
-        //     .data(data_bar)
-        //     .join("text")
-        //     .attr("class", "label_bar_value")// this allows us to position the text in the center of the bar
-        //     .attr("x", margin_bar.left + 30)// + (xScale.bandwidth() / 2))
-        //     .attr("y", d => yScale_bar(d.LocationDesc))
-        //     .text(d => `${d.LocationDesc}`)
-        //     .attr("dy", "1em");
 
         svg_barchart
             .append("g")
             .attr("class", "axis x-axis")
             .attr("transform", `translate(0, ${height_bar - margin_bar.bottom})`)
-            //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
             .call(xAxis_bar)
             .append("text")
             .attr("class", "axis-label")
@@ -211,8 +293,8 @@ Promise.all([
             .selectAll("text")
             .data(data_bar2)
             .join("text")
-            .attr("class", "label_bar")// this allows us to position the text in the center of the bar
-            .attr("x", margin_bar2.left + 55)//d => xScale_bar(d.Data_Value) - 20)// + (xScale.bandwidth() / 2))
+            .attr("class", "label_bar")
+            .attr("x", margin_bar2.left + 55)
             .attr("y", d => yScale_bar2(d.Education))
             .text(d => `${d.Data_Value + "%"}`)
             .attr("dy", "1.4em");
@@ -221,7 +303,6 @@ Promise.all([
             .append("g")
             .attr("class", "axis x-axis")
             .attr("transform", `translate(0, ${height_bar2 - margin_bar2.bottom})`)
-            //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
             .call(xAxis_bar2)
             .append("text")
             .attr("class", "axis-label")
@@ -239,108 +320,11 @@ Promise.all([
             .call(yAxis_bar2)
 
 
-        // FEDERAL AND STATE TAX TO TEN BARCHART
-
-        const svg_fed = d3
-            .select("#bar-one")
-            .append("svg")
-            .attr("width", width_fed)
-            .attr("height", height_fed);
-
-
-        const div_fed = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-
-        const yScale_fed = d3
-            .scaleBand()
-            .domain(["District of Columbia", "Connecticut", "New York", "Rhode Island", "Minnesota", "Massachusetts", "Hawaii", "Vermont", "Washington",])
-            .range([margin_fed.top, height_fed - margin_fed.bottom])
-            .paddingInner(0.2)
-            .paddingOuter(0.2);
-
-
-        const xScale_fed = d3
-            .scaleLinear()
-            .domain([0, d3.max(data_fed, d => d.Data_Value)])//58])
-            .range([margin_fed.left, width_fed - margin_fed.right]);
-
-        //console.log("x_bar", xScale_bar.domain(), "y_bar", yScale_bar.domain())
-        // reference for d3.axis: https://github.com/d3/d3-axis
-        const xAxis_fed = d3.axisBottom(xScale_fed)//.ticks(data_bar.length)
-        const yAxis_fed = d3.axisLeft(yScale_fed)//.tickValues([])
-
-        svg_fed
-            .selectAll("rect")
-            .data(data_fed)
-            .join("rect")
-            .attr("class", "rect.bar")
-            .attr("y", d => yScale_fed(d.LocationDesc))
-            .attr("x", margin_fed.left)//d => xScale_bar(d))
-            .attr("height", yScale_fed.bandwidth())
-            .attr("width", d => xScale_fed(d.Data_Value) - margin_fed.left)
-            .attr("fill", "lightgrey")//"rgb(190, 184, 192)")
-
-            .on('mouseover', (event, d) => {
-                // console.log("tooltip d", d)
-                div_fed
-                    .transition()
-                    .duration(50)
-                    .style('opacity', 1);
-                div_fed
-                    .html("State: " + "<h3><strong>" + d.LocationDesc + "</strong></h3>" +
-                        "Federal and State Tax: " + "<strong>" + d.Data_Value + "</strong>"
-                    )
-
-                    .style("left", (event.pageX + 10) + "px")
-                    .style("top", (event.pageY - 28) + "px");
-            })
-            .on('mouseout', () => {
-                div_fed
-                    .transition()
-                    .duration(100)
-                    .style('opacity', 0);
-            })
-
-        // append text
-        const text5 = svg_fed
-            .selectAll("text")
-            .data(data_fed)
-            .join("text")
-            .attr("class", "label_bar")// this allows us to position the text in the center of the bar
-            .attr("x", margin_fed.left + 20)//d => xScale_bar(d.Data_Value) - 20)// + (xScale.bandwidth() / 2))
-            .attr("y", d => yScale_fed(d.LocationDesc))
-            .text(d => `${"$" + d.Data_Value}`)
-            .attr("dy", "1em");
-
-
-        svg_fed
-            .append("g")
-            .attr("class", "axis x-axis")
-            .attr("transform", `translate(0, ${height_fed - margin_fed.bottom})`)
-            //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
-            .call(xAxis_fed)
-            .append("text")
-            .attr("class", "axis-label")
-            .attr("x", "60%")
-            .attr("dy", "2.2em")
-            .text("Federal and State Tax, $")
-            .attr("font-size", "16")
-            .attr("fill", "black")
-            .attr('opacity', 0.8)
-
-        svg_fed
-            .append("g")
-            .attr("class", "axis y-axis-scatter")
-            .attr("transform", `translate(${margin_fed.left},0)`)
-            .call(yAxis_fed)
-
         ///////////------------------//////////////////
         //BAR CHART BY REGION
 
         const svg_reg = d3
-            .select("#barchart-region")
+            .select("#bar-region")
             .append("svg")
             .attr("width", width_reg)
             .attr("height", height_reg);
@@ -363,7 +347,7 @@ Promise.all([
 
         //console.log("x", xScale.domain(), "y", yScale.domain())
 
-        const xAxis_reg = d3.axisBottom(xScale_reg)//.ticks(state.income.length)
+        const xAxis_reg = d3.axisBottom(xScale_reg)
         const yAxis_reg = d3.axisLeft(yScale_reg)//.tickValues([])
 
         // reference for d3.axis: https://github.com/d3/d3-axis
@@ -403,9 +387,8 @@ Promise.all([
             .data(data_reg)
             .join("text")
             .attr("class", "label_bar")
-            // this allows us to position the text in the center of the bar
             .attr("y", d => yScale_reg(d.Region))
-            .attr("x", margin_reg.left + 20)//d => xScale(d.Percentage))
+            .attr("x", margin_reg.left + 20)
             .text(d => `${d.Percentage + "%"}`)
             .attr("dy", "1.2em")
 
@@ -414,7 +397,6 @@ Promise.all([
             .append("g")
             .attr("class", "axis x-axis")
             .attr("transform", `translate(0, ${height_reg - margin_reg.bottom})`)
-            //.attr("transform", `translate(0,${height3 - margin3.bottom})`)
             .call(xAxis_reg)
             .append("text")
             .attr("class", "axis-label")
@@ -430,7 +412,6 @@ Promise.all([
             .attr("class", "axis y-axis-scatter")
             .attr("transform", `translate(${margin_reg.left},0)`)
             .call(yAxis_reg)
-
 
     })
 
