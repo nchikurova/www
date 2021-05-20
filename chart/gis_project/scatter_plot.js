@@ -136,7 +136,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .append("svg")
         // .attr("width", width_scatter)
         // .attr("height", height_scatter);
-        .attr("viewBox", "0 0 400 340")
+        .attr("viewBox", "0 0 400 380")
         .append("g")
         .attr("transform", "translate(0,0)")
 
