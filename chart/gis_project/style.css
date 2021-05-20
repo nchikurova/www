@@ -323,6 +323,6 @@ path.trend1 {
 .label_map_year {
 font-size: 24px;
 }
-/* .axis-label-scatter{
+.text.map{
   font-size: 12px;
-} */
+}

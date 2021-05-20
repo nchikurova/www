@@ -1,8 +1,8 @@
 'use strict';
 
-let width = 440;
-let height = 400;
-let margin = { top: 60, bottom: 50, left: 20, right: 40 };
+let width = 400;
+let height = 320;
+let margin = { top: 60, bottom: 20, left: 20, right: 40 };
 
 let svg;
 let projection;
@@ -10,9 +10,9 @@ let path;
 let div;
 let bubble;
 
-let width2 = 440;
-let height2 = 400;
-let margin2 = { top: 60, bottom: 50, left: 40, right: 40 };
+let width2 = 400;
+let height2 = 320;
+let margin2 = { top: 60, bottom: 20, left: 40, right: 40 };
 
 let svg2;
 let projection2;
@@ -30,7 +30,7 @@ let state = {
     geojson: null,
     taxes: null,
     income: null,
-    // avg_cost: null,
+
 };
 
 /**
@@ -45,12 +45,12 @@ Promise.all([
         Percentage: +d.Percentage,
         Income: d.Income,
     })),
-    // d3.csv("../data/Avg_cost_yearly.csv", d3.autoType),
-]).then(([geojson, taxes, income, avg_cost]) => {
+
+]).then(([geojson, taxes, income]) => {
     state.geojson = geojson;
     state.taxes = taxes;
     state.income = income;
-    // state.avg_cost = avg_cost;
+
     // console.log("state: ", state);
     init();
 });
@@ -66,14 +66,12 @@ function init() {
     svg = d3
         .select("#map-container")
         .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-    // .attr("viewBox", "0 0 500 320")
-    // .append("g")
-    // .attr("transform", "translate(0,0)")
-    // .attr("text-anchor", "middle")
-    // .attr("font-family", "sans-serif")
-    // .attr("font-size", 10)
+        // .attr("width", width)
+        // .attr("height", height)
+        .attr("viewBox", "0 0 420 340")
+        .append("g")
+        .attr("transform", "translate(0,0)")
+
 
     //formatTime = d3.format(",") //if value interpreted by number
 
@@ -133,8 +131,8 @@ function init() {
         .selectAll("text.year")
         .data(["2010"])
         .join("text")
-        .attr("class", "label_map_year")// this allows us to position the text in the center of the bar
-        .attr("x", width2 / 4)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
+        .attr("class", "label_map_year")
+        .attr("x", width2 / 4)
         .attr("y", height / 40)
         .text(d => d)
         .attr("dy", "1em");
@@ -147,14 +145,12 @@ function init() {
     svg2 = d3
         .select("#map-container2")
         .append("svg")
-        // .attr("viewBox", "0 0 500 320")
-        // .append("g")
-        // .attr("transform", "translate(0,0)")
-        // .attr("text-anchor", "middle")
-        // .attr("font-family", "sans-serif")
-        // .attr("font-size", 10)
-        .attr("width", width2)
-        .attr("height", height2);
+        .attr("viewBox", "0 0 420 340")
+        .append("g")
+        .attr("transform", "translate(0,0)")
+
+    // .attr("width", width2)
+    // .attr("height", height2);
 
     //formatTime = d3.format(",") //if value interpreted by number
 
@@ -219,7 +215,7 @@ function init() {
         .attr("width", 30)
         .attr("height", 11)
         .attr("stroke", "black")
-        .attr("y", height2 / 10)
+        .attr("y", "87%")//height2 / 10)
         .attr("x", function (d, i) { return width2 - width2 / 2.5 - 20 + i * 30 })
         .style("fill", d => legendColor(d))
 
@@ -227,8 +223,8 @@ function init() {
         .data(keysText)
         .enter()
         .append("text")
-        .style("font-size", 10)
-        .attr("y", height2 / 12)
+        .style("font-size", 12)
+        .attr("y", "93%")//height2 - height2 / 50)
         .attr("x", function (d, i) { return width2 - width2 / 2.5 + 5 + i * 30 })
         .style("fill", "black")
         .text(d => d)
@@ -241,9 +237,10 @@ function init() {
         .join("text")
         .attr("class", "label_map")// this allows us to position the text in the center of the bar
         .attr("x", width2 / 2)//d => xScale_scatter(d.Data_Value))// + (xScale.bandwidth() / 2))
-        .attr("y", height / 60)
+        .attr("y", '81%')//height2 - height2 / 30)
         .text(d => d)
         .attr("dy", "1em");
+
     const text_map2 = svg2
         .selectAll("text.year")
         .data(["2019"])
