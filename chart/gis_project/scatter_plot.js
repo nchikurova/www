@@ -68,10 +68,13 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(yAxis)
         .append("text")
-        .attr("class", "axis-label-scatter")
-        .attr("y", "80%") //in the middle of line
-        .attr("dx", "-3em")
-        .attr("writing-mode", "vertical-rl")
+        .attr("class", "axis-label-scatterplot")
+        // .attr("y", "30%") //in the middle of line
+        // .attr("dx", "-8em")
+        // .attr("transform", "rotate(-90)")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left + 20)
+        .attr("x", -margin.top - 25)
         .text("Average cost of cigarettes per pack ($)")
         .attr("font-size", "14")
         .attr("fill", "black")

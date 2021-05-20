@@ -4,6 +4,7 @@ body {
   /* margin-left: 7%;
   margin-right: 7%; */
 /* font-family: 'Source Sans Pro', sans-serif; */
+
 }
 
 header{
@@ -67,16 +68,15 @@ div.tooltip {
   #body-wrapper {
     margin-left: 7%;
      margin-right: 7%; 
-   
    }
 
    .article {
     padding: 20px;
     text-align:left;
     background:rgb(243, 241, 245);
-  line-height: 1.5em;
+    line-height: 1.5em;
     font-size:20px;
-   
+    
   }
 path.state {
     stroke: white;
@@ -93,6 +93,7 @@ path.state:hover {
 .title {
   background-color: rgb(236, 229, 238);
   padding: 10px;
+ 
 }
 #map-containers{
   display: grid;
