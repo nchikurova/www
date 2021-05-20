@@ -321,7 +321,7 @@ function init() {
         .attr("class", "label_bar")
         // this allows us to position the text in the center of the bar
         .attr("y", d => yScale(d.Income))
-        .attr("x", margin3.left + 20)//d => xScale(d.Percentage))
+        .attr("x", margin3.left + 10)//d => xScale(d.Percentage))
         .text(d => d.Income)
         .attr("dy", "1.6em")
 
