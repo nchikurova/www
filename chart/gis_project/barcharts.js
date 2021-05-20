@@ -72,7 +72,7 @@ Promise.all([
             .selectAll("rect")
             .data(data_fed)
             .join("rect")
-            .attr("class", "rect.bar")
+            .attr("class", "rect")
             .attr("y", d => yScale_fed(d.LocationDesc))
             .attr("x", margin_fed.left)
             .attr("height", yScale_fed.bandwidth())
@@ -109,7 +109,7 @@ Promise.all([
             .attr("x", margin_fed.left + 20)
             .attr("y", d => yScale_fed(d.LocationDesc))
             .text(d => `${"$" + d.Data_Value}`)
-            .attr("dy", "1em");
+            .attr("dy", "1.2em");
 
         svg_fed
             .append("g")
@@ -163,7 +163,7 @@ Promise.all([
             .selectAll("rect")
             .data(data_bar)
             .join("rect")
-            .attr("class", "rect.bar")
+            .attr("class", "rect")
             .attr("y", d => yScale_bar(d.LocationDesc))
             .attr("x", margin_bar.left)//d => xScale_bar(d))
             .attr("height", yScale_bar.bandwidth())
@@ -260,7 +260,7 @@ Promise.all([
             .selectAll("rect")
             .data(data_bar2)
             .join("rect")
-            .attr("class", "rect.bar")
+            .attr("class", "rect")
             .attr("y", d => yScale_bar2(d.Education))
             .attr("x", margin_bar2.left)//d => xScale_bar(d))
             .attr("height", yScale_bar2.bandwidth())

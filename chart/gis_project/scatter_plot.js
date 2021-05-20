@@ -100,7 +100,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
                 .html(
                     "State: " + "<strong><h3>" + d.LocationDesc + "</strong></h3>" +
                     "Average Cost per Pack: " + formatNumber(d.Data_Value) +
-                    "<br>" + d.Year
+                    "<br>" + "Year: " + d.Year
 
                 )
                 .style("left", (event.pageX + 10) + "px")
@@ -169,7 +169,7 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .selectAll("rect")
         .data(topTen)
         .join("rect")
-        .attr("class", "rect.scatter")
+        .attr("class", "rect")
         .attr("y", d => yScale_scatter(d.LocationDesc))
         .attr("x", margin_scatter.left)//d => xScale_bar(d))
         .attr("height", yScale_scatter.bandwidth())
@@ -186,7 +186,6 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
                 .html("State: " + "<h3><strong>" + d.LocationDesc + "</strong></h3>" +
                     "Average Cost " + "<strong>" + formatNumber(d.Data_Value) + "</strong>"
                 )
-
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
@@ -208,7 +207,6 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .text(d => `${"$" + formatNumber(d.Data_Value)}`)
         .attr("dy", "1em");
 
-
     svg_scatter_bar
         .append("g")
         .attr("class", "axis x-axis-scatter")
@@ -228,19 +226,9 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .append("g")
         .attr("class", "axis y-axis-scatter")
         .attr("transform", `translate(${margin_scatter.left}, 0)`)
-
         .call(yAxis_scatter)
         .append("text")
         .attr("class", "axis-label-scatter")
-    // .attr("y", "40%") //in the middle of line
-    // .attr("dx", "-0.7em")
-    // .attr("writing-mode", "vertical-rl")
-    // .text("State")
-    // .attr("font-size", "16")
-    // .attr("fill", "black")
-    // .attr('opacity', 0.8)
-
-
 
 })
 

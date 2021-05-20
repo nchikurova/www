@@ -297,7 +297,10 @@ grid-area: 'arc2';
   stroke-width: 1px;
   stroke: black ;
 }
-
+.rect.bar-one:hover {
+  stroke-width: 1px;
+  stroke: black ;
+}
 path.trend {
   stroke:rgb(4, 110, 27);
 }
