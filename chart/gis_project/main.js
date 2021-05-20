@@ -1,6 +1,6 @@
 'use strict';
 
-let width = 460;
+let width = 440;
 let height = 400;
 let margin = { top: 60, bottom: 50, left: 20, right: 40 };
 
@@ -10,7 +10,7 @@ let path;
 let div;
 let bubble;
 
-let width2 = 460;
+let width2 = 440;
 let height2 = 400;
 let margin2 = { top: 60, bottom: 50, left: 40, right: 40 };
 

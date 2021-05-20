@@ -2,7 +2,7 @@
 d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => {
 
     //console.log(data);
-    let width = 500;
+    let width = 480;
     let height = 400;
     let margin = { top: 20, bottom: 50, left: 60, right: 40 };
     let tooltip;
@@ -10,8 +10,8 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
     let yScale;
     let svg_scatter;
     let div;
-    let width_scatter = 460;
-    let height_scatter = 340;
+    let width_scatter = 440;
+    let height_scatter = 360;
     let margin_scatter = { top: 20, bottom: 50, left: 160, right: 40 };
     let xScale_scatter;
     let yScale_scatter;
@@ -69,9 +69,6 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .call(yAxis)
         .append("text")
         .attr("class", "axis-label-scatterplot")
-        // .attr("y", "30%") //in the middle of line
-        // .attr("dx", "-8em")
-        // .attr("transform", "rotate(-90)")
         .attr("transform", "rotate(-90)")
         .attr("y", -margin.left + 20)
         .attr("x", -margin.top - 25)
