@@ -19,7 +19,7 @@ let projection2;
 let path2;
 let div2;
 
-let width3 = 400;
+let width3 = 380;
 let height3 = 300;
 let margin3 = { top: 0, bottom: 50, left: 40, right: 20 };
 
