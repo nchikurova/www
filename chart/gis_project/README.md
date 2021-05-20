@@ -24,7 +24,7 @@ For further analyses I separated these categories into different datasets using 
 
 ## Data Analyses and Visualization:
 
-###### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
+### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
 
 First section includes the scatterplot chart of the average cost of cigarettes per pack from 1970 to 2019 by state. I wanted to show the overall picture of how the average price of cigarettes has changed for the past 50 years. This chart clearly shows the growth of the prices and by hovering over the points you can see the average cost of cigarettes per pack in each state and each year from 1970 to 2019. 
 
@@ -35,13 +35,13 @@ Here we can see that from 2010 to 2019 there are data points that are much highe
          
 On the right side I decided to highlight the top 10 states with the highest average cost per pack in 2019. 
 
-###### Average Cost of Cigarettes per Pack in 2010 and 2019
+### Average Cost of Cigarettes per Pack in 2010 and 2019
 
 Second section includes two choropleth maps of the United States that represent the average cost of cigarettes per pack by color. On the left the map represents the cost in 2010 and on the right – 2019. I used the same color domain for both maps so the viewer can see the difference in prices by darkness of each state.
  
 Both maps are made in d3.js, using geoAlbersUSA projection, usState.json and dataset with the average cost of cigarettes per pack.
 
-###### Federal and State Tax as a Percentage of Retail Prices in 2019
+### Federal and State Tax as a Percentage of Retail Prices in 2019
 
 For the next section I decided to use one of the QGIS features: creating diagrams for each data point. As the first step, since my dataset includes years from 1970 to 2019, I filtered data in Properties -> Query Builder -> “Year” = 2019. 
  
@@ -57,13 +57,13 @@ For the third part of this section I wanted to show the federal and state tax as
 
 On the right side of this map is the bar chart that represents adult cigarette smoking in 2019 by U.S. Census Region. Here, the viewer can see the correlation between the value of federal and state tax by state and the adult cigarette consumption by region.
  
-###### Cigarettes Smoking among Adults in the United States by Category in 2019
+### Cigarettes Smoking among Adults in the United States by Category in 2019
 
 I already explored how the average cost per pack and tax have been growing over the years. In this section I wanted to see the relation between cigarettes consumption and such factors as annual income and level of education. 
 
 Surprisingly, the more money people make the less they smoke. About 20 out of 100 people who have annual household income lower than $35,000 smoke, while there are only 7% of smokers out of those who make more than $100,000 per year.
  
-###### Cigarette Consumption (Pack Sales per Capita) and Average Cost of Cigarettes per Pack
+### Cigarette Consumption (Pack Sales per Capita) and Average Cost of Cigarettes per Pack
 
 For this section I needed to do some analysis in QGIS. To make this line chart I needed to find the average of the cost value in each year and the average of cigarette consumption in each year. I needed to summarize all values in each state per year and find the average of these values.
 Using a Query building function in Layer -> Create New layer, I created a new layer by using the following formula:
@@ -74,11 +74,11 @@ from Cigarette_consumption
 group by Year
 order by sum(Data_Value) desc`
 
-Then, I needed to divide the sum of values per each year by 51 – number of states in each year. So, using Open field calculator, I created a new column where each of the sum_of_prices column value is divided by 51:
- 
- 
-Since both layers, cigarette consumption per capita and the average cost per pack, have the same structure, I used the same steps to find average cost among states in each year:
- 
+Then, I needed to divide the sum of values per each year by 51 – number of states in each year. Using Open field calculator, I created a new column where each of the sum_of_values column value is divided by 51:
 
-The line chart is created in d3.js.
+Since both layers, cigarette consumption per capita and the average cost per pack, have the same structure, I used the same steps to find average cost among states in each year.
+
+The line chart was created in d3.js.
+
+## Structure of the code
 
