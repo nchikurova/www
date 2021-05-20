@@ -348,13 +348,13 @@ function init() {
         .append("g")
         .attr("class", "axis y-axis")
         .attr("transform", `translate(${margin3.left},0)`)
-        // .attr("transform", `translate(${margin3.left}, ${margin3.right})`)
         .call(yAxis)
         .append("text")
         .attr("class", "axis-label")
-        .attr("y", "80%") //in the middle of line
-        .attr("dx", "-1em")
-        .attr("writing-mode", "vertical-rl")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left + 10)
+        .attr("x", -margin.top + 20)
+
         .text("Annual Household Income")
         .attr("font-size", "16")
         .attr("fill", "black")
