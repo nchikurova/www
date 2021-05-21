@@ -112,8 +112,8 @@ function init() {
             div
                 .html(
                     "State: " + "<strong><h3>" + d.properties.NAME + "</strong></h3>" +
-                    "Average Cost per Pack: " + newDataYear.get(d.properties.NAME) +
-                    "<br>" + formatNumber(newData.get(d.properties.NAME))
+                    "Average Cost per Pack in " + newDataYear.get(d.properties.NAME) +
+                    "<br>" + "was " + formatNumber(newData.get(d.properties.NAME))
 
                 )
                 .style("left", (event.pageX + 10) + "px")
@@ -191,8 +191,8 @@ function init() {
             div2
                 .html(
                     "State: " + "<strong><h3>" + d.properties.NAME + "</strong></h3>" +
-                    "Average Cost per Pack: " + newDataYear2.get(d.properties.NAME) +
-                    "<br>" + formatNumber(newData2.get(d.properties.NAME))
+                    "Average Cost per Pack in " + newDataYear.get(d.properties.NAME) +
+                    "<br>" + "was " + formatNumber(newData.get(d.properties.NAME))
 
                 )
                 .style("left", (event.pageX + 10) + "px")
