@@ -1,5 +1,7 @@
 # Does the Cost of Cigarettes Prevent People from Smoking?
 
+The link to the project is [here[(https://nchikurova.github.io/www/chart/gis_project/).
+
 This project was created for DATA 78000 Geospatial Humanities and Spatial Data Analysis and Visualization class with Dr. Shipeng Sun at the CUNY Graduate Center, Spring 2021.
 
 Being born and raised in Russia, I know that the price of cigarettes over there is very low and has never stopped anyone from smoking. After moving to the US, I was shocked at how expensive cigarettes in this country were. I couldn’t stop wondering if the cost of the cigarettes would change the number of people who smoke. I decided to take a look at the correlation between the average cost of cigarettes and the cigarette consumption in the United States.
@@ -25,6 +27,8 @@ For further analyses I separated these categories into different datasets using 
 ## Data Analyses and Visualization:
 
 ### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
+
+ ![](confidence.png) ![](conf.png)
 
 First section includes the scatterplot chart of the average cost of cigarettes per pack from 1970 to 2019 by state. I wanted to show the overall picture of how the average price of cigarettes has changed for the past 50 years. This chart clearly shows the growth of the prices and by hovering over the points you can see the average cost of cigarettes per pack in each state and each year from 1970 to 2019. 
 
@@ -80,7 +84,9 @@ Since both layers, cigarette consumption per capita and the average cost per pac
 
 The line chart was created in d3.js.
 
-## Structure of the code
+## Code Structure 
+
+Code could be find [here](https://github.com/nchikurova/www/tree/main/chart/gis_project).
 
 I have changed and reorganized code for this project few times. For anyone who is interesed in particular charts and for my future self I wanted to which `.js` file includes which chart.
 
@@ -127,7 +133,7 @@ linechart
 #### `barcharts.js`:
 - bar-one
 - bar-two
-- bar-eduaction
+- bar-education
 - bar-region
 
 #### `scatter_plot.js`:
