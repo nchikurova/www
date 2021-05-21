@@ -82,3 +82,31 @@ The line chart was created in d3.js.
 
 ## Structure of the code
 
+I have changed and reorganized code for this project few times. For anyone who is interesed in particular charts and for my future self I wanted to which `.js` file includes which chart.
+
+html ids of svg containers and their location on the page:
+
+#### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
+scatter-wrap:
+scatterplot-container (left) and scatter-bar (right)
+
+#### Average Cost of Cigarettes per Pack in 2010 and 2019
+map-containers:
+map-container (left) and map-container2 (right)
+
+#### Federal and State Tax as a Percentage of Retail Prices in 2019
+qgis_map(image)
+
+barchart:
+bar-one (left) and bar-two (right)
+
+arcgis-wrapper:
+arcgis-map (left) and bar-region (right)
+
+#### Cigarettes Smoking among Adults in the United States by Category in 2019
+category:
+bar-education (left) and bar-income (right)
+
+#### Cigarette Consumption (Pack Sales per Capita) and Average Cost of Cigarettes per Pack
+linechart-wrapper:
+linechart
