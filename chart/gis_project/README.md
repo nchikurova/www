@@ -116,3 +116,23 @@ bar-education (left) and bar-income (right)
 linechart-wrapper:
 
 linechart
+
+### `.js` files and svg containers in them:
+
+#### `map.js`:
+- map-container
+- map-container2
+- bar-income
+
+#### `barcharts.js`:
+- bar-one
+- bar-two
+- bar-eduaction
+- bar-region
+
+#### `scatter_plot.js`:
+- scatterplot-container
+- scatter-bar
+
+#### `linechart.js`:
+- linechart
