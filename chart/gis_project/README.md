@@ -57,7 +57,7 @@ Then, I created a new column using Open Field Calculator to count “the rest of
  
 I decreased the capacity of the circles because the circles in the Northeast region overlap.
  
-As a size, I chose fixed size, so the overall picture is not clattered. The viewer’s attention will be on the most important part here – the number of percentage.
+As a size, I chose fixed size, so the overall picture is not clattered. The viewer’s attention will be on the most important part here – the number of the percentage.
 
  ![](images/bartax.png)
  
