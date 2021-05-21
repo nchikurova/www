@@ -84,7 +84,7 @@ The line chart was created in d3.js.
 
 I have changed and reorganized code for this project few times. For anyone who is interesed in particular charts and for my future self I wanted to which `.js` file includes which chart.
 
-html ids of svg containers and their location on the page:
+### `html` ids of svg containers and their location on the page:
 
 #### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
 scatter-wrap:
