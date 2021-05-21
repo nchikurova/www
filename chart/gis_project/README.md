@@ -40,6 +40,7 @@ Here we can see that from 2010 to 2019 there are data points that are much highe
 On the right side I decided to highlight the top 10 states with the highest average cost per pack in 2019. 
 
 ### Average Cost of Cigarettes per Pack in 2010 and 2019
+
 ![](images/maps.png)
 
 Second section includes two choropleth maps of the United States that represent the average cost of cigarettes per pack by color. On the left the map represents the cost in 2010 and on the right – 2019. I used the same color domain for both maps so the viewer can see the difference in prices by darkness of each state.
@@ -47,6 +48,7 @@ Second section includes two choropleth maps of the United States that represent 
 Both maps are made in d3.js, using geoAlbersUSA projection, usState.json and dataset with the average cost of cigarettes per pack.
 
 ### Federal and State Tax as a Percentage of Retail Prices in 2019
+
 ![](images/piechartmap.png)
 
 For the next section I decided to use one of the QGIS features: creating diagrams for each data point. As the first step, since my dataset includes years from 1970 to 2019, I filtered data in Properties -> Query Builder -> “Year” = 2019. 
@@ -56,21 +58,29 @@ Then, I created a new column using Open Field Calculator to count “the rest of
 I decreased the capacity of the circles because the circles in the Northeast region overlap.
  
 As a size, I chose fixed size, so the overall picture is not clattered. The viewer’s attention will be on the most important part here – the number of percentage.
+
  ![](images/bartax.png)
+ 
 As a continuation of the Federal and State tax section and to make picture clearer for the viewer, I added two bar charts: the top 10 states with the highest federal and state tax measured in dollars (on the left) and the top 10 states with the highest federal and state tax as a percentage of retail price (on the right). Here the viewer can compare federal and state tax in different measurement.
+
  ![](images/arcgismap.png)
+ 
 For the third part of this section I wanted to show the federal and state tax as a proportional symbol and compare it to the average cost. So, I joined two layers (federal and state tax and average cost per pack) by field value (states) and created an interactive [map in ArcGIS](https://arcg.is/1HjeSm), adding state tax and average price per pack as a bar chart in pop up figure. Labels are added in very large scale only, since the base layer of the map has the name of the states by default.
 
 On the right side of this map is the bar chart that represents adult cigarette smoking in 2019 by U.S. Census Region. Here, the viewer can see the correlation between the value of federal and state tax by state and the adult cigarette consumption by region.
  
 ### Cigarettes Smoking among Adults in the United States by Category in 2019
+
 ![](images/category.png)
+
 I already explored how the average cost per pack and tax have been growing over the years. In this section I wanted to see the relation between cigarettes consumption and, in my opinion, are the most money-related factors: annual income and level of education. 
 
 Surprisingly, the more money people make the less they smoke. About 20 out of 100 people who have annual household income lower than $35,000 smoke, while there are only 7% of smokers out of those who make more than $100,000 per year.
  
 ### Cigarette Consumption (Pack Sales per Capita) and Average Cost of Cigarettes per Pack
+
 ![](images/linechart.png)
+
 For this section I needed to do some analysis in QGIS. To make this line chart I needed to find the average of the cost value in each year and the average of cigarette consumption in each year. I needed to summarize all values in each state per year and find the average of these values.
 Using a Query building function in Layer -> Create New layer, I created a new layer by using the following formula:
 
