@@ -28,7 +28,7 @@ For further analyses I separated these categories into different datasets using 
 
 ### Average Cost of Cigarettes in U.S. by State from 1970 to 2019
 
- ![](confidence.png) ![](conf.png)
+ ![](images/averagecost.png) ![](images/averagecost.png)
 
 First section includes the scatterplot chart of the average cost of cigarettes per pack from 1970 to 2019 by state. I wanted to show the overall picture of how the average price of cigarettes has changed for the past 50 years. This chart clearly shows the growth of the prices and by hovering over the points you can see the average cost of cigarettes per pack in each state and each year from 1970 to 2019. 
 
