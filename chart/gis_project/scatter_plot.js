@@ -44,6 +44,9 @@ d3.csv("../data/Average_cost_per_pack_LAT_LONG2.csv", d3.autoType).then(data => 
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+    // .attr("width", innerWidth / 2)
+    // .attr("height", innerHeight);
+
     // .attr("viewBox", "0 0 300 320")
     // .append("g")
     // .attr("transform", "translate(0,0)")
